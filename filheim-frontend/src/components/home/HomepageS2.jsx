@@ -1,5 +1,3 @@
-import { IoArrowForward } from 'react-icons/io5';
-import AboutImg from '../../assets/sc5.jpg';
 import { BiCabinet } from 'react-icons/bi';
 
 function HomepageS2() {
@@ -95,7 +93,7 @@ function HomepageS2() {
                                         <div className=''>
                                             <div className='flex w-full'>
                                                 <img
-                                                    src={AboutImg}
+                                                    src={'/sc5.jpg'}
                                                     alt='Home About Filheim Img'
                                                     className='h-[500px] w-full'
                                                 />

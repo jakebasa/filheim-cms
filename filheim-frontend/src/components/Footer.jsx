@@ -3,7 +3,6 @@ import { MdEmail } from 'react-icons/md';
 import { FaLocationDot } from 'react-icons/fa6';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { AiFillInstagram, AiFillTikTok } from 'react-icons/ai';
-import FilheimLogo from '../assets/FilheimLogoBlack.png';
 
 function Footer() {
     return (
@@ -19,7 +18,7 @@ function Footer() {
                                 className='inline-flex items-center'
                             >
                                 <img
-                                    src={FilheimLogo}
+                                    src={'/FilheimLogoBlack.png'}
                                     alt='Filheim Logo'
                                     className='w-full h-5 object-cover group-hover:scale-105 transition-transform duration-300'
                                 />

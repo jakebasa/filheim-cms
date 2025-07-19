@@ -3,10 +3,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import bgKitchen from '../../assets/cc.png';
-import bgBathroom from '../../assets/cc-2.jpg';
-import bgWardrobe from '../../assets/cc-3.jpg';
-import bgLivingArea from '../../assets/cc-4.jpg';
 
 import { projects } from '../../constants/data';
 

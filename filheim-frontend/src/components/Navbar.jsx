@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import FilheimLogo from '../assets/FilheimLogoWhite.png';
 
 const defaultMenuItems = [
     { path: '/', label: 'HOME' },
@@ -10,7 +9,8 @@ const defaultMenuItems = [
 ];
 
 function Navbar({
-    logo = FilheimLogo,
+    logo = '/FilheimLogoWhite.png',
+
     logoHeight = 'h-6',
     logoWidth = 'w-auto',
     menuItems = defaultMenuItems,
@@ -65,7 +65,7 @@ function Navbar({
                     className='flex items-center space-x-3 rtl:space-x-reverse'
                 >
                     <img
-                        src={logo}
+                        src='/FilheimLogoWhite.png'
                         alt='Logo'
                         className={`${logoWidth} ${logoHeight} ${
                             logoHeight === 'h-auto' ? '' : 'object-contain'

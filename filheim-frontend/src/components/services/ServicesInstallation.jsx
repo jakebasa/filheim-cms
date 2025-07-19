@@ -1,4 +1,3 @@
-import Img from '../../assets/sc3.jpg';
 import { SiMaterialformkdocs } from 'react-icons/si';
 
 function ServicesInstallation() {
@@ -13,7 +12,7 @@ function ServicesInstallation() {
                         <div className='grid md:grid-cols-2 items-start gap-8'>
                             <div className='flex justify-end items-end'>
                                 <img
-                                    src={Img}
+                                    src={'/sc3.jpg'}
                                     alt='Installation'
                                     className='h-[500px] w-[450px] object-cover rounded-xl shadow-lg'
                                 />
