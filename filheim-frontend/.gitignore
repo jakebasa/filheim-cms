@@ -11,6 +11,9 @@ node_modules
 dist-ssr
 *.local
 
+# Dependency directories
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -25,3 +28,6 @@ dist-ssr
 .env
 
 filheim-frontend/dist/
+
+.next/
+dist/

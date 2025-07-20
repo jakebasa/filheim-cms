@@ -1,6 +1,7 @@
 // app/layout.jsx
 import '../index.css';
 import Footer from '../components/Footer';
+import { Toaster } from 'sonner';
 
 export const metadata = {
     title: 'Filheim',
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
         <html lang='en'>
             <body>
                 {children}
+                <Toaster />
                 <Footer />
             </body>
         </html>
