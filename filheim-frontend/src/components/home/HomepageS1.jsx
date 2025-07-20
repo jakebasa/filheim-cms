@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 function HomepageS1() {
     return (
@@ -29,7 +29,7 @@ function HomepageS1() {
                         </p>
 
                         <Link
-                            to='/contact'
+                            href='/contact'
                             className='mt-10 md:mt-28 flex h-10 px-8 font-semibold text-gray-200 shadow-md hover:text-white bg-[#9A7842] hover:bg-[#7a5f34] items-center justify-center hover:scale-105 transition-transform duration-300 uppercase'
                             style={{
                                 fontFamily: "'Inter', sans-serif",

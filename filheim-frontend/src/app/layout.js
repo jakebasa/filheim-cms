@@ -1,12 +1,22 @@
+// app/layout.jsx
+import '../index.css';
+import Footer from '../components/Footer';
+
 export const metadata = {
     title: 'Filheim',
-    description: 'Custom Cabinet Solutions',
+    description: 'Description of my site',
+    icons: {
+        icon: '/favicon.ico',
+    },
 };
 
 export default function RootLayout({ children }) {
     return (
         <html lang='en'>
-            <body>{children}</body>
+            <body>
+                {children}
+                <Footer />
+            </body>
         </html>
     );
 }

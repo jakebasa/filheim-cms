@@ -3,7 +3,7 @@ export const projects = [
         id: 1,
         category: 'Minimalist',
         title: 'Minimalist',
-        image: '/cc.jpg',
+        image: '/cc.png',
     },
     {
         id: 2,
@@ -27,7 +27,7 @@ export const projects = [
         id: 5,
         category: 'Luxury',
         title: 'Luxury',
-        image: '/cc.jpg',
+        image: '/cc.png',
     },
     {
         id: 6,
@@ -51,7 +51,7 @@ export const projects = [
         id: 9,
         category: 'Commercial',
         title: 'Commercial',
-        image: '/cc.jpg',
+        image: '/cc.png',
     },
     {
         id: 10,

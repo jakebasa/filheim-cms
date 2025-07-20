@@ -1,3 +1,4 @@
+'use client';
 import { MdOutlineZoomOutMap } from 'react-icons/md';
 import { useState } from 'react';
 import { projects } from '../../constants/data';

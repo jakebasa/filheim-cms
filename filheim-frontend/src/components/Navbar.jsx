@@ -1,5 +1,6 @@
+'use client';
 import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const defaultMenuItems = [
     { path: '/', label: 'HOME' },
@@ -61,7 +62,7 @@ function Navbar({
         <nav className={`border-gray-200 ${navPadding} ${className}`}>
             <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4'>
                 <Link
-                    to='/'
+                    href='/'
                     className='flex items-center space-x-3 rtl:space-x-reverse'
                 >
                     <img
@@ -75,7 +76,7 @@ function Navbar({
                 <div className='flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse'>
                     {showContactButton && (
                         <Link
-                            to={contactLink}
+                            href={contactLink}
                             className={`${textColor} ${buttonBg} ${buttonHover} focus:ring-4 focus:outline-none ${focusRing} font-semibold rounded-sm text-sm px-4 py-2 text-center ${buttonBorder} transition duration-200 border-2 border-white`}
                             style={{
                                 fontFamily: "'Inter', sans-serif",
@@ -137,7 +138,7 @@ function Navbar({
                                 }
                             >
                                 <Link
-                                    to={item.path}
+                                    href={item.path}
                                     className={`block py-2 px-3 md:p-0 ${textColor} font-normal hover:font-semibold`}
                                 >
                                     {item.label}

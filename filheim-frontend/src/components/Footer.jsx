@@ -40,7 +40,7 @@ function Footer() {
                             <span
                                 className='text-base font-bold tracking-wide text-gray-900'
                                 style={{
-                                    fontFamily: "'Gotham Bold', sans-serif",
+                                    fontFamily: "'Montserrat', sans-serif",
                                 }}
                             >
                                 Social
@@ -77,7 +77,7 @@ function Footer() {
                             <span
                                 className='text-base font-bold tracking-wide text-gray-900'
                                 style={{
-                                    fontFamily: "'Gotham Bold', sans-serif",
+                                    fontFamily: "'Montserrat', sans-serif",
                                 }}
                             >
                                 Quick Links
@@ -117,7 +117,7 @@ function Footer() {
                             <p
                                 className='text-base font-bold tracking-wide text-gray-900'
                                 style={{
-                                    fontFamily: "'Gotham Bold', sans-serif",
+                                    fontFamily: "'Montserrat', sans-serif",
                                 }}
                             >
                                 Contacts

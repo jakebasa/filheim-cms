@@ -1,3 +1,4 @@
+'use client';
 import { SiMaterialformkdocs } from 'react-icons/si';
 
 import { motion } from 'framer-motion';
