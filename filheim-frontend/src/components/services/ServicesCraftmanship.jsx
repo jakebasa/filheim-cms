@@ -1,9 +1,26 @@
 'use client';
 import { SiMaterialformkdocs } from 'react-icons/si';
-
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { getAsideImages } from '../../constants/data';
 
 function ServicesCraftmanship() {
+    const [image, setImage] = useState(null);
+
+    useEffect(() => {
+        const loadImage = async () => {
+            try {
+                const images = await getAsideImages();
+                if (images && images.length > 0) {
+                    setImage(images[1].image);
+                }
+            } catch (error) {
+                console.error('Error loading background image:', error);
+            }
+        };
+
+        loadImage();
+    }, []);
     return (
         <section
             id='collection-cabinets'
@@ -108,7 +125,7 @@ function ServicesCraftmanship() {
                                 transition={{ duration: 0.6, ease: 'easeOut' }}
                             >
                                 <img
-                                    src={'/sc3.jpg'}
+                                    src={image}
                                     alt='Craftmanship and Production Img'
                                     className='h-[740px] w-[500px] rounded-xl object-cover shadow-2xl'
                                 />

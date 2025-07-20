@@ -1,6 +1,45 @@
+'use client';
 import { IoArrowForward } from 'react-icons/io5';
+import { useState, useEffect } from 'react';
+import { fetchProjects } from '../../constants/data';
 
 function ServicesCusto() {
+    const [images, setImages] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const loadImages = async () => {
+            try {
+                setIsLoading(true);
+                const projects = await fetchProjects();
+                // Only take the first 5 images
+                setImages(projects.slice(11, 16));
+            } catch (error) {
+                console.error('Error fetching images:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        loadImages();
+    }, []);
+
+    // Default images as fallback
+    const defaultImages = [
+        '/sc5.jpg',
+        '/sc1.jpg',
+        '/sc2.jpg',
+        '/sc3.jpg',
+        '/sc4.jpg',
+    ];
+    const styles = [
+        'Transitional',
+        'Concord',
+        'Classic',
+        'Luxor',
+        'Minimalist',
+    ];
+
     return (
         <section id='collection-cabinets' className='py-16'>
             <div className='flex justify-center items-center text-left'>
@@ -30,10 +69,10 @@ function ServicesCusto() {
                                         collaborative vision and meticulous
                                         craftsmanship.
                                     </p>
-                                    <button className='flex flex-row gap-2 items-center bg-gray-900 text-white uppercase text-sm p-1 px-4 font-regular hover:font-semibold'>
+                                    {/* <button className='flex flex-row gap-2 items-center bg-gray-900 text-white uppercase text-sm p-1 px-4 font-regular hover:font-semibold'>
                                         Read More
                                         <IoArrowForward />
-                                    </button>
+                                    </button> */}
                                 </div>
                             </div>
 
@@ -46,14 +85,14 @@ function ServicesCusto() {
                                             className='group relative flex flex-col overflow-hidden px-4 pb-4 pt-40 flex-grow'
                                         >
                                             <img
-                                                src={'/sc5.jpg'}
-                                                alt='Wine selection'
+                                                src={images[0]?.image}
+                                                alt={
+                                                    images[0]?.title ||
+                                                    'Concord'
+                                                }
                                                 className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
                                             />
                                             <div className='absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5'></div>
-                                            <h3 className='z-10 text-xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-xl'>
-                                                Transitional
-                                            </h3>
                                         </a>
                                     </div>
 
@@ -64,14 +103,14 @@ function ServicesCusto() {
                                             className='group relative flex flex-col overflow-hidden px-4 pb-4 pt-40 mb-4'
                                         >
                                             <img
-                                                src={'/sc1.jpg'}
-                                                alt='Gin selection'
+                                                src={images[1]?.image}
+                                                alt={
+                                                    images[1]?.title ||
+                                                    'Concord'
+                                                }
                                                 className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
                                             />
                                             <div className='absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5'></div>
-                                            <h3 className='z-10 text-xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-xl'>
-                                                Concord
-                                            </h3>
                                         </a>
 
                                         <div className='grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-2'>
@@ -80,14 +119,14 @@ function ServicesCusto() {
                                                 className='group relative flex flex-col overflow-hidden px-4 pb-4 pt-40'
                                             >
                                                 <img
-                                                    src={'/sc2.jpg'}
-                                                    alt='Whiskey selection'
+                                                    src={images[2]?.image}
+                                                    alt={
+                                                        images[2]?.title ||
+                                                        'Classic'
+                                                    }
                                                     className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
                                                 />
                                                 <div className='absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5'></div>
-                                                <h3 className='z-10 text-xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-xl'>
-                                                    Classic
-                                                </h3>
                                             </a>
 
                                             <a
@@ -95,14 +134,14 @@ function ServicesCusto() {
                                                 className='group relative flex flex-col overflow-hidden px-4 pb-4 pt-40'
                                             >
                                                 <img
-                                                    src={'/sc3.jpg'}
-                                                    alt='Vodka selection'
+                                                    src={images[3]?.image}
+                                                    alt={
+                                                        images[3]?.title ||
+                                                        'Luxor'
+                                                    }
                                                     className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
                                                 />
                                                 <div className='absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5'></div>
-                                                <h3 className='z-10 text-xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-xl'>
-                                                    Luxor
-                                                </h3>
                                             </a>
                                         </div>
                                     </div>
@@ -113,14 +152,14 @@ function ServicesCusto() {
                                             className='group relative flex flex-col overflow-hidden px-4 pb-4 pt-40 flex-grow'
                                         >
                                             <img
-                                                src={'/sc4.jpg'}
-                                                alt='Brandy selection'
+                                                src={images[4]?.image}
+                                                alt={
+                                                    images[4]?.title ||
+                                                    'Minimalist'
+                                                }
                                                 className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
                                             />
                                             <div className='absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5'></div>
-                                            <h3 className='z-10 text-xl font-medium text-white absolute top-0 left-0 p-4 xs:text-xl md:text-xl'>
-                                                Minimalist
-                                            </h3>
                                         </a>
                                     </div>
                                 </div>

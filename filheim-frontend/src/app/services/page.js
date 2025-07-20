@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import ServicesHero from '../../components/services/ServicesHero';
 import ServicesCusto from '../../components/services/ServicesCusto';
@@ -6,12 +8,31 @@ import ServicesInstallation from '../../components/services/ServicesInstallation
 import ServicesMaintenance from '../../components/services/ServicesMaintenance';
 import ServicesFAQ from '../../components/services/ServicesFAQ';
 import Navbar from '../../components/Navbar';
+import { useEffect, useState } from 'react';
+import { getBackgroundImages } from '../../constants/data';
+
 function ServicesPage() {
+    const [bgImage, setBgImage] = useState('');
+
+    useEffect(() => {
+        const loadBackgroundImage = async () => {
+            try {
+                const images = await getBackgroundImages();
+                if (images && images.length > 0) {
+                    setBgImage(images[0].image);
+                }
+            } catch (error) {
+                console.error('Error loading background image:', error);
+            }
+        };
+
+        loadBackgroundImage();
+    }, []);
     return (
         <div>
             <div
                 style={{
-                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/bg.png')`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${bgImage})`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
@@ -26,7 +47,7 @@ function ServicesPage() {
             <ServicesCusto />
             <ServicesCraftmanship />
             <ServicesInstallation />
-            <ServicesMaintenance />
+            {/* <ServicesMaintenance /> */}
             <ServicesFAQ />
         </div>
     );

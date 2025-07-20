@@ -2,39 +2,33 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 
-import { projects } from '../../constants/data';
+import { fetchProjects } from '../../constants/data';
 
 function HomepageOtherLayout() {
-    const [activeIndex, setActiveIndex] = useState(2); // Start with center slide active
-    const swiperRef = useRef(null);
-
-    const handleSlideChange = (swiper) => {
-        setActiveIndex(swiper.activeIndex);
-    };
-
-    const getSlideHeight = (slideIndex) => {
-        const distanceFromCenter = Math.abs(slideIndex - activeIndex);
-
-        if (distanceFromCenter === 0) {
-            return 'h-80'; // Center slide - shortest
-        } else if (distanceFromCenter === 1) {
-            return 'h-96'; // Adjacent slides - medium
-        } else if (distanceFromCenter === 2) {
-            return 'h-80'; // Next adjacent - shorter again
-        } else {
-            return 'h-96'; // All others - default height
-        }
-    };
+    const [projects, setProjects] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Initialize Swiper instance when component mounts
-        if (swiperRef.current) {
-            swiperRef.current.on('slideChange', handleSlideChange);
-        }
+        const loadProjects = async () => {
+            try {
+                setIsLoading(true);
+                const fetchedProjects = await fetchProjects();
+                setProjects(fetchedProjects);
+            } catch (error) {
+                console.error('Error fetching projects:', error);
+                setProjects([]);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        loadProjects();
     }, []);
 
     return (
@@ -63,9 +57,16 @@ function HomepageOtherLayout() {
             {/* Image Gallery Grid */}
             <div className='bg-white px-12'>
                 <Swiper
-                    modules={[]}
-                    spaceBetween={2}
+                    modules={[Autoplay]}
+                    spaceBetween={16}
                     slidesPerView={5}
+                    loop={true}
+                    autoplay={{
+                        delay: 2000,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true,
+                    }}
+                    speed={1000}
                     breakpoints={{
                         320: { slidesPerView: 1 },
                         640: { slidesPerView: 2 },
@@ -75,25 +76,24 @@ function HomepageOtherLayout() {
                     }}
                     className='mySwiper'
                 >
-                    {projects.map((project) => (
-                        <SwiperSlide key={project.id}>
-                            <div className='h-full'>
-                                <div className='h-96 bg-gray-200 mb-4 rounded-sm overflow-hidden'>
-                                    <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        className='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
-                                    />
-                                </div>
-                                <span className='text-sm uppercase tracking-wider text-gray-500'>
-                                    {project.category}
-                                </span>
-                                <h3 className='text-2xl font-bold mt-2'>
-                                    {project.title}
-                                </h3>
-                            </div>
-                        </SwiperSlide>
-                    ))}
+                    {isLoading
+                        ? // Loading skeletons
+                          [...Array(5)].map((_, index) => (
+                              <SwiperSlide key={`skeleton-${index}`}>
+                                  <div className='h-96 bg-gray-200 rounded-sm animate-pulse'></div>
+                              </SwiperSlide>
+                          ))
+                        : projects.map((project) => (
+                              <SwiperSlide key={project.id}>
+                                  <div className='h-96 rounded-sm overflow-hidden'>
+                                      <img
+                                          src={project.image}
+                                          alt={project.title || 'Project Image'}
+                                          className='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
+                                      />
+                                  </div>
+                              </SwiperSlide>
+                          ))}
                 </Swiper>
             </div>
 

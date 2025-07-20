@@ -1,3 +1,122 @@
+const STRAPI_URL =
+    process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+
+export const fetchProjects = async () => {
+    try {
+        const res = await fetch(`${STRAPI_URL}/api/galleries?populate=image`);
+        const data = await res.json();
+
+        return data.data.map((project) => ({
+            id: project.id,
+            name: project.name,
+            image: project.image?.url
+                ? `${STRAPI_URL}${project.image.url}`
+                : '/cc.png', // fallback image
+        }));
+    } catch (error) {
+        console.error('Error fetching projects:', error);
+        return [];
+    }
+};
+
+export async function getBackgroundImages() {
+    try {
+        const res = await fetch(
+            `${STRAPI_URL}/api/background-images?populate=image`
+        );
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(
+                data?.error?.message || 'Failed to fetch background images'
+            );
+        }
+
+        // Extract only image URLs
+        return data.data.map((item) => ({
+            image: item.image?.url
+                ? `${STRAPI_URL}${item.image.url}`
+                : '/cc.png', // fallback image
+        }));
+    } catch (error) {
+        console.error('Error fetching background images:', error.message);
+        return [];
+    }
+}
+
+export async function getAsideImages() {
+    try {
+        const res = await fetch(`${STRAPI_URL}/api/asides?populate=image`);
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(
+                data?.error?.message || 'Failed to fetch background images'
+            );
+        }
+
+        // Extract only image URLs
+        return data.data.map((item) => ({
+            image: item.image?.url
+                ? `${STRAPI_URL}${item.image.url}`
+                : '/cc.png', // fallback image
+        }));
+    } catch (error) {
+        console.error('Error fetching background images:', error.message);
+        return [];
+    }
+}
+
+export async function getCeosImages() {
+    try {
+        const res = await fetch(`${STRAPI_URL}/api/ceos?populate=image`);
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(
+                data?.error?.message || 'Failed to fetch CEO images'
+            );
+        }
+
+        // Extract only image URLs
+        return data.data.map((item) => ({
+            name: item.name,
+
+            image: item.image?.url
+                ? `${STRAPI_URL}${item.image.url}`
+                : '/cc.png', // fallback image
+        }));
+    } catch (error) {
+        console.error('Error fetching CEO images:', error.message);
+        return [];
+    }
+}
+
+export async function getTeamImages() {
+    try {
+        const res = await fetch(`${STRAPI_URL}/api/teams?populate=image`);
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(
+                data?.error?.message || 'Failed to fetch team images'
+            );
+        }
+
+        // Extract only image URLs
+        return data.data.map((item) => ({
+            name: item.name,
+            position: item.position,
+            image: item.image?.url
+                ? `${STRAPI_URL}${item.image.url}`
+                : '/cc.png', // fallback image
+        }));
+    } catch (error) {
+        console.error('Error fetching team images:', error.message);
+        return [];
+    }
+}
+
 export const projects = [
     {
         id: 1,
