@@ -1,6 +1,24 @@
-import { BiCabinet } from 'react-icons/bi';
+'use client';
+import { useEffect, useState } from 'react';
+import { getAsideImages } from '../../constants/data';
 
 function HomepageS2() {
+    const [image, setImage] = useState(null);
+
+    useEffect(() => {
+        const loadImage = async () => {
+            try {
+                const images = await getAsideImages();
+                if (images && images.length > 0) {
+                    setImage(images[0].image || null); // Ensure null if image is empty string
+                }
+            } catch (error) {
+                console.error('Error loading background image:', error);
+            }
+        };
+
+        loadImage();
+    }, []);
     return (
         <section id='collection-hero' className='py-24'>
             <div className='flex justify-center items-center text-left'>
@@ -62,41 +80,20 @@ function HomepageS2() {
                                                     fontFamily:
                                                         "'Proxima Nova', sans-serif",
                                                 }}
-                                            >
-                                                <div className='flex flex-row items-center gap-2'>
-                                                    <BiCabinet size={26} />
-                                                    <span className='text-lg'>
-                                                        Custom Cabinets
-                                                    </span>
-                                                </div>
-                                                <div className='flex flex-row items-center gap-2'>
-                                                    <BiCabinet size={26} />
-                                                    <span className='text-lg'>
-                                                        Custom Cabinets
-                                                    </span>
-                                                </div>
-                                                <div className='flex flex-row items-center gap-2'>
-                                                    <BiCabinet size={26} />
-                                                    <span className='text-lg'>
-                                                        Custom Cabinets
-                                                    </span>
-                                                </div>
-                                                <div className='flex flex-row items-center gap-2'>
-                                                    <BiCabinet size={26} />
-                                                    <span className='text-lg'>
-                                                        Custom Cabinets
-                                                    </span>
-                                                </div>
-                                            </div>
+                                            ></div>
                                         </div>
 
                                         <div className=''>
                                             <div className='flex w-full'>
-                                                <img
-                                                    src={'/sc5.jpg'}
-                                                    alt='Home About Filheim Img'
-                                                    className='h-[500px] w-full'
-                                                />
+                                                {image ? (
+                                                    <img
+                                                        src={image}
+                                                        alt='Home About Filheim Img'
+                                                        className='h-[500px] w-full object-cover'
+                                                    />
+                                                ) : (
+                                                    <div className='h-[500px] w-full bg-gray-200 animate-pulse' />
+                                                )}
                                             </div>
                                         </div>
                                     </div>

@@ -1,4 +1,25 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { getBackgroundImages } from '../../constants/data';
+
 function HomepageIntro2() {
+    const [bgImage, setBgImage] = useState('');
+
+    useEffect(() => {
+        const loadBackgroundImage = async () => {
+            try {
+                const images = await getBackgroundImages();
+                if (images && images.length > 0) {
+                    setBgImage(images[2].image);
+                }
+            } catch (error) {
+                console.error('Error loading background image:', error);
+            }
+        };
+
+        loadBackgroundImage();
+    }, []);
     return (
         <section id='collection-hero' className=''>
             <div className='flex justify-center items-center text-left'>
@@ -48,7 +69,9 @@ function HomepageIntro2() {
 
             <div
                 className='w-full relative h-[500px] bg-cover bg-center flex justify-center text-left'
-                style={{ backgroundImage: "url('/intro2.jpg')" }}
+                style={{
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0)), url(${bgImage})`,
+                }}
             >
                 <div className='w-full max-w-screen-2xl px-4'>
                     <div className='absolute inset-0 bg-black bg-opacity-50'></div>

@@ -1,14 +1,31 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
+import { getBackgroundImages } from '../../constants/data';
 
 function ContactPage() {
+    const [bgImage, setBgImage] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: '',
     });
     const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        const loadBackgroundImage = async () => {
+            try {
+                const images = await getBackgroundImages();
+                if (images && images.length > 0) {
+                    setBgImage(images[1].image);
+                }
+            } catch (error) {
+                console.error('Error loading background image:', error);
+            }
+        };
+
+        loadBackgroundImage();
+    }, []);
 
     const validate = () => {
         const newErrors = {};
@@ -43,8 +60,7 @@ function ContactPage() {
             <section
                 className='pt-20 pb-20 text-center text-white bg-cover bg-center relative'
                 style={{
-                    backgroundImage:
-                        "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=1200')",
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${bgImage})`,
                 }}
             >
                 <div className='absolute top-0 left-0 w-full z-50 text-white'>

@@ -1,6 +1,26 @@
+'use client';
+
 import { SiMaterialformkdocs } from 'react-icons/si';
+import { useState, useEffect } from 'react';
+import { getAsideImages } from '../../constants/data';
 
 function ServicesInstallation() {
+    const [image, setImage] = useState(null);
+
+    useEffect(() => {
+        const loadImage = async () => {
+            try {
+                const images = await getAsideImages();
+                if (images && images.length > 0) {
+                    setImage(images[2].image || null);
+                }
+            } catch (error) {
+                console.error('Error loading background image:', error);
+            }
+        };
+
+        loadImage();
+    }, []);
     return (
         <section
             id='collection-cabinets'
@@ -11,11 +31,15 @@ function ServicesInstallation() {
                     <div className='space-y-6'>
                         <div className='grid md:grid-cols-2 items-start gap-8'>
                             <div className='flex justify-end items-end'>
-                                <img
-                                    src={'/sc3.jpg'}
-                                    alt='Installation'
-                                    className='h-[500px] w-[450px] object-cover rounded-xl shadow-lg'
-                                />
+                                {image ? (
+                                    <img
+                                        src={image}
+                                        alt='Installation'
+                                        className='h-[500px] w-[450px] object-cover rounded-xl shadow-lg'
+                                    />
+                                ) : (
+                                    <div className='h-[500px] w-[450px] bg-gray-200 animate-pulse rounded-xl' />
+                                )}
                             </div>
                             <div>
                                 <div className='pl-10'>
@@ -44,8 +68,13 @@ function ServicesInstallation() {
                                     </p>
                                 </div>
 
-                                {/* Reusable feature block */}
-                                {[...Array(4)].map((_, i) => (
+                                {/* Installation Features */}
+                                {[
+                                    'Professional Measurement & Planning',
+                                    'Experienced Installation Team',
+                                    'Advanced Tools & Equipment',
+                                    'Quality Control & Testing',
+                                ].map((feature, i) => (
                                     <div
                                         key={i}
                                         className='pl-10 flex flex-row gap-6 mt-4 items-center group transition duration-200'
@@ -54,13 +83,13 @@ function ServicesInstallation() {
                                             <SiMaterialformkdocs size={20} />
                                         </div>
                                         <p className='text-lg font-semibold group-hover:text-[#9A7842] transition'>
-                                            Lorem ipsum lorem ipsum
+                                            {feature}
                                         </p>
                                     </div>
                                 ))}
 
                                 {/* Bottom Floating Stats */}
-                                <div className='relative'>
+                                {/* <div className='relative'>
                                     <div
                                         className='bg-gray-300 p-8 mt-10 grid md:grid-cols-3 md:absolute md:left-[-50px] md:bottom-[-110px] md:w-[calc(100%+50px)] rounded-xl shadow-lg'
                                         style={{
@@ -69,25 +98,25 @@ function ServicesInstallation() {
                                         }}
                                     >
                                         <p className='font-semibold text-3xl'>
-                                            1{' '}
+                                            15+{' '}
                                             <span className='text-lg font-normal'>
-                                                lorem
+                                                Years Experience
                                             </span>
                                         </p>
                                         <p className='font-semibold text-3xl'>
-                                            2{' '}
+                                            1000+{' '}
                                             <span className='text-lg font-normal'>
-                                                lorem
+                                                Projects Completed
                                             </span>
                                         </p>
                                         <p className='font-semibold text-3xl'>
-                                            3{' '}
+                                            100%{' '}
                                             <span className='text-lg font-normal'>
-                                                lorem
+                                                Customer Satisfaction
                                             </span>
                                         </p>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
