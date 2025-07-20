@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Navbar from '../../components/Navbar';
+import { toast } from 'sonner';
 
 function ContactPage() {
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function ContactPage() {
         message: '',
     });
     const [errors, setErrors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
 
     const validate = () => {
         const newErrors = {};
@@ -23,18 +25,42 @@ function ContactPage() {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        setErrors({ ...errors, [e.target.name]: '' });
+        setErrors((prev) => ({ ...prev, [e.target.name]: '' }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
+        setErrors({});
         const validationErrors = validate();
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
+            setIsLoading(false);
             return;
         }
-        console.log('Submitted:', formData);
-        setFormData({ name: '', email: '', message: '' });
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok || !data.success) {
+                toast.error(data.error || 'Failed to submit the form.');
+                setErrors({ submit: data.error || 'Failed to submit the form. Please try again later.' });
+            } else {
+                toast.success('Inquiry sent successfully!');
+                setFormData({ name: '', email: '', message: '' });
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            setErrors({ submit: 'Failed to submit the form. Please try again later.' });
+            toast.error('Failed to submit the form. Please try again later.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -88,6 +114,8 @@ function ContactPage() {
                                 value={formData.email}
                                 onChange={handleChange}
                                 className='w-full p-3 rounded border border-gray-300 focus:border-[#b0984b] focus:ring-[#b0984b]/40 focus:ring-2'
+                                disabled={isLoading}
+                                autoComplete="email"
                             />
                             {errors.email && (
                                 <p className='text-red-500 text-sm mt-1'>
@@ -103,6 +131,8 @@ function ContactPage() {
                                 value={formData.name}
                                 onChange={handleChange}
                                 className='w-full p-3 rounded border border-gray-300 focus:border-[#b0984b] focus:ring-[#b0984b]/40 focus:ring-2'
+                                disabled={isLoading}
+                                autoComplete="name"
                             />
                             {errors.name && (
                                 <p className='text-red-500 text-sm mt-1'>
@@ -118,6 +148,7 @@ function ContactPage() {
                                 value={formData.message}
                                 onChange={handleChange}
                                 className='w-full p-3 rounded border border-gray-300 focus:border-[#b0984b] focus:ring-[#b0984b]/40 focus:ring-2'
+                                disabled={isLoading}
                             ></textarea>
                             {errors.message && (
                                 <p className='text-red-500 text-sm mt-1'>
@@ -125,12 +156,15 @@ function ContactPage() {
                                 </p>
                             )}
                         </div>
+                        {errors.submit && (
+                            <p className='text-red-500 text-sm mt-1'>{errors.submit}</p>
+                        )}
                         <button
                             type='submit'
-                            // className="bg-gradient-to-r from-[#C0A86B] to-[#A68638] text-white font-semibold px-6 py-3 rounded hover:scale-105 transition-transform duration-300"
-                            className=' text-white font-semibold px-6 py-3 hover:scale-105 transition bg-[#9A7842] hover:bg-[#7a5f34]'
+                            disabled={isLoading}
+                            className={`text-white font-semibold px-6 py-3 rounded transition bg-[#9A7842] hover:bg-[#7a5f34] hover:scale-105 ${isLoading ? 'opacity-60 cursor-not-allowed' : ''}`}
                         >
-                            Inquire Now
+                            {isLoading ? 'Sending Inquiry...' : 'Inquire Now'}
                         </button>
                     </form>
 
@@ -155,7 +189,6 @@ function ContactPage() {
             </section>
 
             {/* Newsletter Section */}
-            {/* <section className="bg-[#f5f5f5] py-16 text-white text-center transition-colors duration-500"> */}
             <section className='bg-gray-900 py-16 text-white text-center transition-colors duration-500'>
                 <h3
                     className='text-4xl font-bold'
@@ -172,11 +205,12 @@ function ContactPage() {
                         type='email'
                         placeholder='Your email address'
                         className='w-full p-3 rounded bg-white/20 text-black focus:outline-none'
+                        disabled={isLoading}
                     />
                     <button
                         type='submit'
-                        // className="bg-gradient-to-r from-[#C0A86B] to-[#A68638] text-white font-semibold px-6 py-3 rounded hover:scale-105 transition"
-                        className=' text-white font-semibold px-6 py-3 hover:scale-105 transition bg-[#9A7842] hover:bg-[#7a5f34]'
+                        className='text-white font-semibold px-6 py-3 hover:scale-105 transition bg-[#9A7842] hover:bg-[#7a5f34]'
+                        disabled={isLoading}
                     >
                         Subscribe
                     </button>
