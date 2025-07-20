@@ -262,7 +262,7 @@ function AboutPage() {
                     </p>
                     <div className='mt-6 w-24 h-1 bg-gradient-to-r from-[#C0A86B] via-[#FEECCB] to-[#A68638] mx-auto' />
                 </div>
-                <div className='grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto'>
                     {isTeamLoading
                         ? // Loading skeletons
                           [...Array(4)].map((_, i) => (
@@ -270,7 +270,7 @@ function AboutPage() {
                                   key={`skeleton-${i}`}
                                   className='animate-pulse'
                               >
-                                  <div className='bg-gray-200 h-72 rounded-xl'></div>
+                                  <div className='bg-gray-200 h-64 sm:h-72 rounded-xl'></div>
                                   <div className='p-4'>
                                       <div className='h-4 bg-gray-200 rounded w-3/4 mx-auto mb-2'></div>
                                       <div className='h-3 bg-gray-200 rounded w-1/2 mx-auto'></div>
@@ -282,11 +282,13 @@ function AboutPage() {
                                   key={i}
                                   className='group overflow-hidden rounded-xl shadow hover:shadow-xl transition-all'
                               >
-                                  <img
-                                      src={member.image}
-                                      alt={member.name}
-                                      className='w-full h-72 object-cover group-hover:scale-105 transition-transform duration-300'
-                                  />
+                                  <div className='aspect-w-4 aspect-h-5 relative'>
+                                      <img
+                                          src={member.image}
+                                          alt={member.name}
+                                          className='w-full h-64 sm:h-72 object-cover group-hover:scale-105 transition-transform duration-300'
+                                      />
+                                  </div>
                                   <div className='p-4 text-center'>
                                       <h4 className='font-semibold text-lg text-gray-800'>
                                           {member.name}
