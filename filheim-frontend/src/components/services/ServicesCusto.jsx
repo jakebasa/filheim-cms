@@ -84,14 +84,15 @@ function ServicesCusto() {
                                             href='#'
                                             className='group relative flex flex-col overflow-hidden px-4 pb-4 pt-40 flex-grow'
                                         >
-                                            <img
-                                                src={images[0]?.image}
-                                                alt={
-                                                    images[0]?.title ||
-                                                    'Concord'
-                                                }
-                                                className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
-                                            />
+                                            {isLoading ? (
+                                                <div className='absolute inset-0 bg-gray-200 animate-pulse' />
+                                            ) : (
+                                                <img
+                                                    src={images[0]?.image}
+                                                    alt=''
+                                                    className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
+                                                />
+                                            )}
                                             <div className='absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5'></div>
                                         </a>
                                     </div>
@@ -102,14 +103,15 @@ function ServicesCusto() {
                                             href='#'
                                             className='group relative flex flex-col overflow-hidden px-4 pb-4 pt-40 mb-4'
                                         >
-                                            <img
-                                                src={images[1]?.image}
-                                                alt={
-                                                    images[1]?.title ||
-                                                    'Concord'
-                                                }
-                                                className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
-                                            />
+                                            {isLoading ? (
+                                                <div className='absolute inset-0 bg-gray-200 animate-pulse' />
+                                            ) : (
+                                                <img
+                                                    src={images[1]?.image}
+                                                    alt=''
+                                                    className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
+                                                />
+                                            )}
                                             <div className='absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5'></div>
                                         </a>
 
@@ -118,14 +120,15 @@ function ServicesCusto() {
                                                 href='#'
                                                 className='group relative flex flex-col overflow-hidden px-4 pb-4 pt-40'
                                             >
-                                                <img
-                                                    src={images[2]?.image}
-                                                    alt={
-                                                        images[2]?.title ||
-                                                        'Classic'
-                                                    }
-                                                    className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
-                                                />
+                                                {isLoading ? (
+                                                    <div className='absolute inset-0 bg-gray-200 animate-pulse' />
+                                                ) : (
+                                                    <img
+                                                        src={images[2]?.image}
+                                                        alt=''
+                                                        className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
+                                                    />
+                                                )}
                                                 <div className='absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5'></div>
                                             </a>
 
@@ -133,14 +136,15 @@ function ServicesCusto() {
                                                 href='#'
                                                 className='group relative flex flex-col overflow-hidden px-4 pb-4 pt-40'
                                             >
-                                                <img
-                                                    src={images[3]?.image}
-                                                    alt={
-                                                        images[3]?.title ||
-                                                        'Luxor'
-                                                    }
-                                                    className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
-                                                />
+                                                {isLoading ? (
+                                                    <div className='absolute inset-0 bg-gray-200 animate-pulse' />
+                                                ) : (
+                                                    <img
+                                                        src={images[3]?.image}
+                                                        alt=''
+                                                        className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
+                                                    />
+                                                )}
                                                 <div className='absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5'></div>
                                             </a>
                                         </div>
@@ -151,14 +155,15 @@ function ServicesCusto() {
                                             href='#'
                                             className='group relative flex flex-col overflow-hidden px-4 pb-4 pt-40 flex-grow'
                                         >
-                                            <img
-                                                src={images[4]?.image}
-                                                alt={
-                                                    images[4]?.title ||
-                                                    'Minimalist'
-                                                }
-                                                className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
-                                            />
+                                            {isLoading ? (
+                                                <div className='absolute inset-0 bg-gray-200 animate-pulse' />
+                                            ) : (
+                                                <img
+                                                    src={images[4]?.image}
+                                                    alt=''
+                                                    className='absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out'
+                                                />
+                                            )}
                                             <div className='absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5'></div>
                                         </a>
                                     </div>

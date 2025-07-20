@@ -108,7 +108,10 @@ function AboutPage() {
         <div className='min-h-screen bg-white text-gray-800'>
             <div
                 style={{
-                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${bgImage})`,
+                    backgroundImage: bgImage
+                        ? `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${bgImage})`
+                        : 'none',
+                    backgroundColor: bgImage ? 'transparent' : '#f5f5f5',
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
