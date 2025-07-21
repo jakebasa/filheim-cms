@@ -10,9 +10,7 @@ export const fetchProjects = async () => {
         return data.data.map((project) => ({
             id: project.id,
             name: project.name,
-            image: project.image?.url
-                ? `${STRAPI_URL}${project.image.url}`
-                : '/cc.png', // fallback image
+            image: project.image?.url ? project.image.url : '/cc.png', // fallback image
         }));
     } catch (error) {
         console.error('Error fetching projects:', error);
@@ -35,9 +33,7 @@ export async function getBackgroundImages() {
 
         // Extract only image URLs
         return data.data.map((item) => ({
-            image: item.image?.url
-                ? `${STRAPI_URL}${item.image.url}`
-                : '/cc.png', // fallback image
+            image: item.image?.url ? item.image.url : '/cc.png', // fallback image
         }));
     } catch (error) {
         console.error('Error fetching background images:', error.message);
@@ -83,9 +79,7 @@ export async function getCeosImages() {
         return data.data.map((item) => ({
             name: item.name,
 
-            image: item.image?.url
-                ? `${STRAPI_URL}${item.image.url}`
-                : '/cc.png', // fallback image
+            image: item.image?.url ? item.image.url : '/cc.png', // fallback image
         }));
     } catch (error) {
         console.error('Error fetching CEO images:', error.message);
@@ -108,9 +102,7 @@ export async function getTeamImages() {
         return data.data.map((item) => ({
             name: item.name,
             position: item.position,
-            image: item.image?.url
-                ? `${STRAPI_URL}${item.image.url}`
-                : '/cc.png', // fallback image
+            image: item.image?.url ? item.image.url : '/cc.png', // fallback image
         }));
     } catch (error) {
         console.error('Error fetching team images:', error.message);
