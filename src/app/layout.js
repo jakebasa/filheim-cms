@@ -5,7 +5,8 @@ import { Toaster } from 'sonner';
 
 export const metadata = {
     title: 'Filheim',
-    description: 'Description of my site',
+    description:
+        'Filheim - Premium Custom Cabinets and Luxury Living Solutions. Specializing in high-end cabinet design, craftsmanship, and installation services',
     icons: {
         icon: '/favicon.ico',
     },
