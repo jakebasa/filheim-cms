@@ -54,9 +54,7 @@ export async function getAsideImages() {
 
         // Extract only image URLs
         return data.data.map((item) => ({
-            image: item.image?.url
-                ? `${STRAPI_URL}${item.image.url}`
-                : '/cc.png', // fallback image
+            image: item.image?.url ? item.image.url : '/cc.png', // fallback image
         }));
     } catch (error) {
         console.error('Error fetching background images:', error.message);
