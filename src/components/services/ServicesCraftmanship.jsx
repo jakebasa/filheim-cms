@@ -21,6 +21,7 @@ function ServicesCraftmanship() {
 
         loadImage();
     }, []);
+
     return (
         <section
             id='collection-cabinets'
@@ -32,8 +33,8 @@ function ServicesCraftmanship() {
         >
             <div className='flex justify-center items-start text-center'>
                 <div className='w-full max-w-screen-xl px-4'>
-                    <div className='space-y-2'>
-                        <div className='grid md:grid-cols-2 gap-8'>
+                    <div className='space-y-12'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
                             {/* Left Content */}
                             <div className='flex flex-col'>
                                 <div>
@@ -41,7 +42,7 @@ function ServicesCraftmanship() {
                                         How we work
                                     </p>
                                     <h1
-                                        className='text-4xl font-bold text-left mb-2'
+                                        className='text-3xl md:text-4xl font-bold text-left mb-4'
                                         style={{
                                             fontFamily:
                                                 "'Playfair Display', serif",
@@ -50,7 +51,7 @@ function ServicesCraftmanship() {
                                         Craftmanship and Production
                                     </h1>
                                     <p
-                                        className='text-lg max-w-5xl mx-auto text-left'
+                                        className='text-base md:text-lg text-left'
                                         style={{
                                             fontFamily: "'Inter', sans-serif",
                                         }}
@@ -65,7 +66,7 @@ function ServicesCraftmanship() {
                                 </div>
 
                                 <div className='w-full pt-12 py-2'>
-                                    <div className='grid gap-6 md:grid-cols-2'>
+                                    <div className='grid gap-6 sm:grid-cols-1 md:grid-cols-2'>
                                         {[
                                             {
                                                 title: 'Material Selection',
@@ -105,10 +106,10 @@ function ServicesCraftmanship() {
                                                         size={20}
                                                     />
                                                 </div>
-                                                <h1 className='text-darken text-lg font-medium lg:px-14 uppercase'>
+                                                <h1 className='text-darken text-lg font-medium uppercase'>
                                                     {card.title}
                                                 </h1>
-                                                <p className='px-4 text-gray-500 text-sm'>
+                                                <p className='text-gray-500 text-sm mt-2'>
                                                     {card.desc}
                                                 </p>
                                             </motion.div>
@@ -117,9 +118,9 @@ function ServicesCraftmanship() {
                                 </div>
                             </div>
 
-                            {/* Image Right */}
+                            {/* Right Image */}
                             <motion.div
-                                className='flex justify-end items-end'
+                                className='flex justify-center md:justify-end items-center'
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -127,7 +128,7 @@ function ServicesCraftmanship() {
                                 <img
                                     src={image}
                                     alt='Craftmanship and Production Img'
-                                    className='h-[740px] w-[500px] rounded-xl object-cover shadow-2xl'
+                                    className='w-full max-w-sm md:max-w-md lg:max-w-lg rounded-xl object-cover shadow-2xl'
                                 />
                             </motion.div>
                         </div>
