@@ -215,10 +215,6 @@ function AboutPage() {
                                   className='animate-pulse rounded-2xl overflow-hidden border border-white/10'
                               >
                                   <div className='w-full h-64 bg-gray-700'></div>
-                                  <div className='absolute inset-0 bg-black/60 p-6 flex flex-col justify-end'>
-                                      <div className='h-6 bg-gray-600 rounded w-1/2 mb-2'></div>
-                                      <div className='h-4 bg-gray-600 rounded w-3/4'></div>
-                                  </div>
                               </div>
                           ))
                         : chooseProjects.map((project, idx) => {
