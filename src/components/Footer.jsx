@@ -141,12 +141,12 @@ function Footer() {
                                 <div className='flex gap-2 items-center'>
                                     <MdEmail className='text-gray-900' />
                                     <a
-                                        href='tel:850-123-5021'
-                                        aria-label='Our phone'
-                                        title='Our phone'
+                                        href='mailto:info@filheim.com'
+                                        aria-label='Our email'
+                                        title='Our email'
                                         className='text-black'
                                     >
-                                        cabinets.by.filheim@gmail.com
+                                        info@filheim.com
                                     </a>
                                 </div>
                                 <div className='flex gap-2 items-center'>
