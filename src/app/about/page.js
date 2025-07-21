@@ -108,14 +108,11 @@ function AboutPage() {
         <div className='min-h-screen bg-white text-gray-800'>
             <div
                 style={{
-                    backgroundImage: bgImage
-                        ? `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${bgImage})`
-                        : 'none',
-                    backgroundColor: bgImage ? 'transparent' : '#f5f5f5',
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(${bgImage})`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
-                    minHeight: '370px',
+                    minHeight: '50vh',
                 }}
             >
                 <div className='absolute top-0 left-0 w-full z-50 text-white'>
@@ -153,13 +150,14 @@ function AboutPage() {
             </section>
 
             {/* Founder Section */}
+            {/* Founder Section */}
             <section className='py-24 px-4 sm:px-10 bg-gray-50'>
                 <div className='max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center'>
                     {ceoData ? (
                         <img
                             src={ceoData.image}
                             alt={ceoData.name}
-                            className='w-full rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-500'
+                            className='w-full max-w-md rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-500 mx-auto h-[80vh]'
                         />
                     ) : (
                         <div className='w-full h-[600px] rounded-2xl bg-gray-200 animate-pulse' />

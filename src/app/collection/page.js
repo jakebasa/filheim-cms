@@ -28,12 +28,11 @@ function CollectionPage() {
         <div>
             <div
                 style={{
-                    // backgroundImage: `url(${bgImg})`,
-                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${bgImage})`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(${bgImage})`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
-                    minHeight: '370px',
+                    minHeight: '50vh',
                 }}
             >
                 <div className='absolute top-0 left-0 w-full z-50 text-white'>
