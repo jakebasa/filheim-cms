@@ -21,6 +21,7 @@ function ServicesInstallation() {
 
         loadImage();
     }, []);
+
     return (
         <section
             id='collection-cabinets'
@@ -29,8 +30,9 @@ function ServicesInstallation() {
             <div className='flex justify-center items-center text-center'>
                 <div className='w-full max-w-screen-xl px-4'>
                     <div className='space-y-6'>
-                        <div className='grid md:grid-cols-2 items-start gap-8'>
-                            <div className='flex justify-end items-end'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 items-start gap-8'>
+                            {/* Left Image */}
+                            <div className='flex justify-center md:justify-end items-end'>
                                 {image ? (
                                     <img
                                         src={image}
@@ -41,13 +43,15 @@ function ServicesInstallation() {
                                     <div className='h-[500px] w-[450px] bg-gray-200 animate-pulse rounded-xl' />
                                 )}
                             </div>
+
+                            {/* Right Content */}
                             <div>
-                                <div className='pl-10'>
-                                    <p className='mt-8 mb-2 text-left text-lg text-[#9A7842]'>
+                                <div className='md:pl-10'>
+                                    <p className='mt-4 mb-2 text-left text-lg text-[#9A7842]'>
                                         Why you should hire us
                                     </p>
                                     <h1
-                                        className='text-4xl font-bold text-left mb-3'
+                                        className='text-3xl md:text-4xl font-bold text-left mb-3'
                                         style={{
                                             fontFamily:
                                                 "'Playfair Display', serif",
@@ -56,7 +60,7 @@ function ServicesInstallation() {
                                         Technical - leveled Cabinet Installation
                                     </h1>
                                     <p
-                                        className='text-lg max-w-2xl mx-auto text-left'
+                                        className='text-base md:text-lg text-left'
                                         style={{
                                             fontFamily: "'Inter', sans-serif",
                                         }}
@@ -77,46 +81,16 @@ function ServicesInstallation() {
                                 ].map((feature, i) => (
                                     <div
                                         key={i}
-                                        className='pl-10 flex flex-row gap-6 mt-4 items-center group transition duration-200'
+                                        className='md:pl-10 flex gap-4 mt-4 items-center group transition duration-200'
                                     >
                                         <div className='p-3 bg-gray-300 rounded-md shadow-md group-hover:shadow-xl transition'>
                                             <SiMaterialformkdocs size={20} />
                                         </div>
-                                        <p className='text-lg font-semibold group-hover:text-[#9A7842] transition'>
+                                        <p className='text-base md:text-lg font-semibold group-hover:text-[#9A7842] transition'>
                                             {feature}
                                         </p>
                                     </div>
                                 ))}
-
-                                {/* Bottom Floating Stats */}
-                                {/* <div className='relative'>
-                                    <div
-                                        className='bg-gray-300 p-8 mt-10 grid md:grid-cols-3 md:absolute md:left-[-50px] md:bottom-[-110px] md:w-[calc(100%+50px)] rounded-xl shadow-lg'
-                                        style={{
-                                            fontFamily:
-                                                "'Playfair Display', serif",
-                                        }}
-                                    >
-                                        <p className='font-semibold text-3xl'>
-                                            15+{' '}
-                                            <span className='text-lg font-normal'>
-                                                Years Experience
-                                            </span>
-                                        </p>
-                                        <p className='font-semibold text-3xl'>
-                                            1000+{' '}
-                                            <span className='text-lg font-normal'>
-                                                Projects Completed
-                                            </span>
-                                        </p>
-                                        <p className='font-semibold text-3xl'>
-                                            100%{' '}
-                                            <span className='text-lg font-normal'>
-                                                Customer Satisfaction
-                                            </span>
-                                        </p>
-                                    </div>
-                                </div> */}
                             </div>
                         </div>
                     </div>
