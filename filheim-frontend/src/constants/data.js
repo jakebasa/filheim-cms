@@ -2,7 +2,9 @@ const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 export const fetchProjects = async () => {
     try {
-        const res = await fetch(`${STRAPI_URL}/api/galleries?populate=image`);
+        const res = await fetch(
+            `${STRAPI_URL}/api/galleries?populate=image&pagination[limit]=1000`
+        );
         const data = await res.json();
 
         return data.data.map((project) => ({
