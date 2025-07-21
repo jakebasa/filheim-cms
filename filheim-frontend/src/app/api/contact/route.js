@@ -3,8 +3,6 @@ import nodemailer from 'nodemailer';
 export async function POST(req) {
     const { name, email, message } = await req.json();
 
-
-    // Configure your SMTP server
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
@@ -61,4 +59,12 @@ export async function POST(req) {
     } catch (error) {
         return new Response(JSON.stringify({ success: false, error: error.message }), { status: 500 });
     }
+}
+
+// Handle all other HTTP methods with a JSON 405 response
+export async function GET() {
+    return new Response(JSON.stringify({ error: 'Method Not Allowed' }), {
+        status: 405,
+        headers: { 'Content-Type': 'application/json' },
+    });
 }
