@@ -20,7 +20,7 @@ function Footer() {
                                 <img
                                     src={'/FilheimLogoBlack.png'}
                                     alt='Filheim Logo'
-                                    className='w-full h-5 object-cover group-hover:scale-105 transition-transform duration-300'
+                                    className='h-5 w-auto object-contain group-hover:scale-105 transition-transform duration-300'
                                 />
                             </a>
                             <div
