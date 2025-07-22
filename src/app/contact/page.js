@@ -5,7 +5,6 @@ import { getBackgroundImages } from '../../constants/data';
 import { toast } from 'sonner';
 
 function ContactPage() {
-    const [bgImage, setBgImage] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -14,12 +13,17 @@ function ContactPage() {
     const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
+    const [bgImage, setBgImage] = useState('');
+
     useEffect(() => {
         const loadBackgroundImage = async () => {
             try {
                 const images = await getBackgroundImages();
-                if (images && images.length > 0) {
-                    setBgImage(images[1].image);
+                const bg1Image = images.find(
+                    (img) => img.name === 'bg-contact'
+                );
+                if (bg1Image) {
+                    setBgImage(bg1Image.image);
                 }
             } catch (error) {
                 console.error('Error loading background image:', error);

@@ -33,6 +33,7 @@ export async function getBackgroundImages() {
 
         // Extract only image URLs
         return data.data.map((item) => ({
+            name: item.name,
             image: item.image?.url ? item.image.url : '/cc.png', // fallback image
         }));
     } catch (error) {

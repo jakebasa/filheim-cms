@@ -17,8 +17,9 @@ export const Home = () => {
         const loadBackgroundImage = async () => {
             try {
                 const images = await getBackgroundImages();
-                if (images && images.length > 0) {
-                    setBgImage(images[0].image);
+                const bg1Image = images.find((img) => img.name === 'bg1');
+                if (bg1Image) {
+                    setBgImage(bg1Image.image);
                 }
             } catch (error) {
                 console.error('Error loading background image:', error);
