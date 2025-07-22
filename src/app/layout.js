@@ -2,6 +2,7 @@
 import '../index.css';
 import Footer from '../components/Footer';
 import { Toaster } from 'sonner';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
     title: 'Filheim',
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
                 {children}
                 <Toaster />
                 <Footer />
+                <Analytics />
             </body>
         </html>
     );

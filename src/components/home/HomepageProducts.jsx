@@ -112,7 +112,7 @@ function HomepageProducts() {
                                       return (
                                           <div
                                               key={item.id}
-                                              className={`group relative overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ${
+                                              className={`group relative overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
                                                   isWideItem
                                                       ? 'md:w-[calc(66.666%_-_0.375rem)]'
                                                       : 'md:w-[calc(33.333%_-_0.375rem)]'
