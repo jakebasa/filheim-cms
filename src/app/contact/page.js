@@ -224,7 +224,10 @@ function ContactPage() {
                     Get the latest insights, trends, and exclusive offers
                     straight to your inbox.
                 </p>
-                <form className='max-w-xl w-full mx-auto flex flex-col sm:flex-row gap-4 justify-center'>
+                <form
+                    className='max-w-xl w-full mx-auto flex flex-col sm:flex-row gap-4 justify-center'
+                    onSubmit={(e) => e.preventDefault()}
+                >
                     <input
                         type='email'
                         placeholder='Your email address'

@@ -3,6 +3,7 @@ import { MdEmail } from 'react-icons/md';
 import { FaLocationDot } from 'react-icons/fa6';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { AiFillInstagram, AiFillTikTok } from 'react-icons/ai';
+import Link from 'next/link';
 
 function Footer() {
     return (
@@ -11,7 +12,7 @@ function Footer() {
                 <div className=' text-white pt-10 px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
                     <div className='grid gap-2 row-gap-2 mb-12 sm:grid-cols-2 lg:grid-cols-5'>
                         <div className='sm:col-span-2 mb-5'>
-                            <a
+                            <Link
                                 href='/'
                                 aria-label='Go home'
                                 title='Company'
@@ -22,7 +23,7 @@ function Footer() {
                                     alt='Filheim Logo'
                                     className='h-5 w-auto object-contain group-hover:scale-105 transition-transform duration-300'
                                 />
-                            </a>
+                            </Link>
                             <div
                                 className='lg:max-w-sm'
                                 style={{ fontFamily: "'Inter', sans-serif" }}
@@ -86,30 +87,30 @@ function Footer() {
                                 className='flex flex-col items-start mt-1 text-gray-900'
                                 style={{ fontFamily: "'Inter', sans-serif" }}
                             >
-                                <a
+                                <Link
                                     href='/'
                                     className='block md:p-0 font-normal hover:font-semibold'
                                 >
                                     Home
-                                </a>
-                                <a
+                                </Link>
+                                <Link
                                     href='/collection'
                                     className='block md:p-0 font-normal hover:font-semibold'
                                 >
                                     Collection
-                                </a>
-                                <a
+                                </Link>
+                                <Link
                                     href='/services'
                                     className='block md:p-0 font-normal hover:font-semibold'
                                 >
                                     Services
-                                </a>
-                                <a
+                                </Link>
+                                <Link
                                     href='/about'
                                     className='block md:p-0 font-normal hover:font-semibold'
                                 >
                                     About
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
