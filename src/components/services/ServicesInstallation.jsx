@@ -81,7 +81,7 @@ function ServicesInstallation() {
                                 ].map((feature, i) => (
                                     <div
                                         key={i}
-                                        className='md:pl-10 flex gap-4 mt-4 items-center group transition duration-200'
+                                        className='md:pl-10 flex flex-col sm:flex-row gap-4 mt-4 items-start sm:items-center group transition duration-200'
                                     >
                                         <div className='p-3 bg-gray-300 rounded-md shadow-md group-hover:shadow-xl transition'>
                                             <SiMaterialformkdocs size={20} />

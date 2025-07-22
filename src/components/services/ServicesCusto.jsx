@@ -77,7 +77,7 @@ function ServicesCusto() {
                             </div>
 
                             <div className='py-4 px-2 mx-auto w-full max-w-screen-xl sm:py-4 lg:px-1'>
-                                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 h-full'>
+                                <div className='grid grid-cols-1 md:grid-cols-5 gap-3 h-full'>
                                     {/* First Column - Wines */}
                                     <div className='col-span-2 sm:col-span-1 md:col-span-2 bg-gray-50 h-auto md:h-full flex flex-col'>
                                         <a
@@ -115,7 +115,7 @@ function ServicesCusto() {
                                             <div className='absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5'></div>
                                         </a>
 
-                                        <div className='grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-2'>
+                                        <div className='grid gap-4 grid-cols-1 sm:grid-cols-2'>
                                             <a
                                                 href='#'
                                                 className='group relative flex flex-col overflow-hidden px-4 pb-4 pt-40'
