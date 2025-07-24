@@ -1,13 +1,11 @@
 import { revalidateTag, revalidatePath } from 'next/cache';
 import { headers } from 'next/headers';
 
-// Webhook secret from environment variable
 const WEBHOOK_SECRET = process.env.STRAPI_WEBHOOK_SECRET;
 
 export async function POST(request) {
     try {
         const headersList = headers();
-        // Verify the webhook secret
         const secret = headersList.get('x-webhook-secret');
 
         if (secret !== WEBHOOK_SECRET) {
@@ -18,12 +16,25 @@ export async function POST(request) {
         }
 
         const body = await request.json();
-        const { model } = body;
 
-        // Revalidate both the content type tag and related paths
+        // Extract model from different possible formats
+        let model = body?.model || body?.event || body?.entry?.collection || '';
+        if (model.includes('::')) {
+            model = model.split('::')[1].split('.')[0];
+        }
+        model = model.toLowerCase();
+
+        if (!model) {
+            return Response.json(
+                { message: 'Model not found in webhook payload' },
+                { status: 400 }
+            );
+        }
+
+        console.log('🟢 Webhook triggered for model:', model);
+
         await revalidateTag(model);
 
-        // Revalidate related pages based on the model
         const pathsToRevalidate = {
             galleries: ['/collection'],
             'background-images': ['/'],
@@ -33,6 +44,7 @@ export async function POST(request) {
         };
 
         if (pathsToRevalidate[model]) {
+            console.log('🔁 Revalidating paths:', pathsToRevalidate[model]);
             await Promise.all(
                 pathsToRevalidate[model].map((path) => revalidatePath(path))
             );
@@ -47,6 +59,7 @@ export async function POST(request) {
             { status: 200 }
         );
     } catch (error) {
+        console.error('❌ Revalidation error:', error);
         return Response.json({ message: error.message }, { status: 500 });
     }
 }

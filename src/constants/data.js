@@ -1,32 +1,24 @@
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
-const REVALIDATE_TIME = 3600; // 1 hour in seconds
 const DEFAULT_IMAGE = '/cc.png';
 
-/**
- * Fetches data from Strapi API with consistent error handling and caching
- * @param {string} endpoint - The API endpoint to fetch from
- * @param {Object} options - Additional fetch options
- * @param {Function} processData - Function to process the response data
- * @returns {Promise<Array>} Processed data array
- */
 async function fetchFromStrapi(endpoint, options = {}, processData) {
     try {
-        // Extract the model name from the endpoint (e.g., 'galleries' from 'galleries?populate=image')
-        const model = endpoint.split('?')[0];
+        // Extract model name from the endpoint
+        const model = endpoint.split('?')[0].toLowerCase(); // normalize to lowercase
+        console.log('Fetching from Strapi model:', model); // DEBUG
 
-        // Enhanced caching strategy for production
         const fetchOptions =
             process.env.NODE_ENV === 'development'
-                ? { cache: 'no-store' } // Disable cache in development
+                ? { cache: 'no-store' }
                 : {
-                      cache: 'force-cache', // Force browser-level caching
+                      cache: 'force-cache',
                       headers: {
                           'Cache-Control':
                               'public, s-maxage=3600, stale-while-revalidate=86400',
                       },
                       next: {
-                          tags: [model], // Enable tag-based revalidation
-                          revalidate: 3600, // Fallback revalidation every hour
+                          tags: [model],
+                          revalidate: 3600,
                       },
                   };
 
@@ -53,10 +45,7 @@ async function fetchFromStrapi(endpoint, options = {}, processData) {
     }
 }
 
-/**
- * Fetches all projects from the gallery
- * @returns {Promise<Array<{id: string, name: string, image: string}>>}
- */
+// All other functions remain unchanged
 export const fetchProjects = () =>
     fetchFromStrapi(
         'galleries?populate=image&pagination[limit]=1000',
@@ -69,10 +58,6 @@ export const fetchProjects = () =>
             }))
     );
 
-/**
- * Fetches background images
- * @returns {Promise<Array<{name: string, image: string}>>}
- */
 export const getBackgroundImages = () =>
     fetchFromStrapi('background-images?populate=image', {}, (data) =>
         data.map((item) => ({
@@ -81,10 +66,6 @@ export const getBackgroundImages = () =>
         }))
     );
 
-/**
- * Fetches aside images for sections
- * @returns {Promise<Array<{image: string}>>}
- */
 export const getAsideImages = () =>
     fetchFromStrapi('asides?populate=image', {}, (data) =>
         data.map((item) => ({
@@ -92,10 +73,6 @@ export const getAsideImages = () =>
         }))
     );
 
-/**
- * Fetches CEO information and images
- * @returns {Promise<Array<{name: string, image: string}>>}
- */
 export const getCeosImages = () =>
     fetchFromStrapi('ceos?populate=image', {}, (data) =>
         data.map((item) => ({
@@ -104,10 +81,6 @@ export const getCeosImages = () =>
         }))
     );
 
-/**
- * Fetches team members information and images
- * @returns {Promise<Array<{name: string, position: string, image: string}>>}
- */
 export const getTeamImages = () =>
     fetchFromStrapi('teams?populate=image', {}, (data) =>
         data.map((item) => ({
