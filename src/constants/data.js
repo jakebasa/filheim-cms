@@ -14,14 +14,24 @@ async function fetchFromStrapi(endpoint, options = {}, processData) {
         // Extract the model name from the endpoint (e.g., 'galleries' from 'galleries?populate=image')
         const model = endpoint.split('?')[0];
 
-        // In development: no cache, in production: use cache with tags
+        // Enhanced caching strategy for production
         const fetchOptions =
             process.env.NODE_ENV === 'development'
                 ? { cache: 'no-store' } // Disable cache in development
-                : { next: { tags: [model] } }; // Use cache with tags in production
+                : {
+                      cache: 'force-cache', // Force browser-level caching
+                      next: {
+                          tags: [model], // Enable tag-based revalidation
+                          revalidate: 3600, // Fallback revalidation every hour
+                      },
+                  };
 
         const res = await fetch(`${STRAPI_URL}/api/${endpoint}`, {
             ...fetchOptions,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options?.headers,
+            },
             ...options,
         });
         const data = await res.json();
