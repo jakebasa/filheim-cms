@@ -20,6 +20,10 @@ async function fetchFromStrapi(endpoint, options = {}, processData) {
                 ? { cache: 'no-store' } // Disable cache in development
                 : {
                       cache: 'force-cache', // Force browser-level caching
+                      headers: {
+                          'Cache-Control':
+                              'public, s-maxage=3600, stale-while-revalidate=86400',
+                      },
                       next: {
                           tags: [model], // Enable tag-based revalidation
                           revalidate: 3600, // Fallback revalidation every hour
