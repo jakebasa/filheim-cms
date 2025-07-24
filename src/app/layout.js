@@ -1,10 +1,15 @@
 // app/layout.jsx
-import '../index.css';
 import Footer from '../components/Footer';
 import { Toaster } from 'sonner';
 import { Analytics } from '@vercel/analytics/next';
+import '../index.css';
 
 export const metadata = {
+    metadataBase: new URL(
+        process.env.NODE_ENV === 'production'
+            ? 'https://filheim.com'
+            : 'http://localhost:3000'
+    ),
     title: 'Filheim',
     description:
         'Filheim - Premium Custom Cabinets and Luxury Living Solutions. Specializing in high-end cabinet design, craftsmanship, and installation services',
@@ -15,7 +20,6 @@ export const metadata = {
         title: 'Filheim',
         description:
             'Filheim - Premium Custom Cabinets and Luxury Living Solutions',
-        url: 'https://filheim.com',
         siteName: 'Filheim',
         images: [
             {
@@ -26,6 +30,12 @@ export const metadata = {
             },
         ],
         type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Filheim',
+        description: 'Premium Custom Cabinets and Luxury Living Solutions',
+        images: ['/hh.png'],
     },
 };
 
