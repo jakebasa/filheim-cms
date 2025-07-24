@@ -31,11 +31,10 @@ function HomepageIntro2({ bgImage }) {
                                                         "'Inter', sans-serif",
                                                 }}
                                             >
-                                                A luxury furniture brand
-                                                redefining cabinetry and home
-                                                design with world-class quality,
-                                                bespoke catalogues, and enduring
-                                                style.
+                                                A luxury cabinetry brand
+                                                redefining home design through
+                                                world-class quality, bespoke
+                                                catalogues, and enduring style.
                                             </p>
                                         </div>
                                     </div>
