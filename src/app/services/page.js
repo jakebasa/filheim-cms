@@ -1,33 +1,25 @@
-'use client';
-
-import React from 'react';
 import ServicesHero from '../../components/services/ServicesHero';
 import ServicesCusto from '../../components/services/ServicesCusto';
 import ServicesCraftmanship from '../../components/services/ServicesCraftmanship';
 import ServicesInstallation from '../../components/services/ServicesInstallation';
-import ServicesMaintenance from '../../components/services/ServicesMaintenance';
 import ServicesFAQ from '../../components/services/ServicesFAQ';
 import Navbar from '../../components/Navbar';
-import { useEffect, useState } from 'react';
-import { getBackgroundImages } from '../../constants/data';
+import {
+    getBackgroundImages,
+    getAsideImages,
+    fetchProjects,
+} from '../../constants/data';
 
-function ServicesPage() {
-    const [bgImage, setBgImage] = useState('');
-
-    useEffect(() => {
-        const loadBackgroundImage = async () => {
-            try {
-                const images = await getBackgroundImages();
-                if (images && images.length > 0) {
-                    setBgImage(images[0].image);
-                }
-            } catch (error) {
-                console.error('Error loading background image:', error);
-            }
-        };
-
-        loadBackgroundImage();
-    }, []);
+async function ServicesPage() {
+    const [images, asideImages, allProjects] = await Promise.all([
+        getBackgroundImages(),
+        getAsideImages(),
+        fetchProjects(),
+    ]);
+    const bgImage = images && images.length > 0 ? images[0].image : '';
+    const craftmanshipImage = asideImages[1]?.image;
+    const installationImage = asideImages[2]?.image;
+    const customizationProjects = allProjects.slice(11, 16);
     return (
         <div>
             <div
@@ -44,9 +36,9 @@ function ServicesPage() {
                 </div>
                 <ServicesHero />
             </div>
-            <ServicesCusto />
-            <ServicesCraftmanship />
-            <ServicesInstallation />
+            <ServicesCusto projects={customizationProjects} />
+            <ServicesCraftmanship asideImage={craftmanshipImage} />
+            <ServicesInstallation asideImage={installationImage} />
             {/* <ServicesMaintenance /> */}
             <ServicesFAQ />
         </div>

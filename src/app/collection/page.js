@@ -1,29 +1,16 @@
-'use client';
-
 import CollectionCabinets from '../../components/collections/CollectionCabinets';
-import CollectionCountertops from '../../components/collections/CollectionCountertops';
 import CollectionHero from '../../components/collections/CollectionHero';
 import Navbar from '../../components/Navbar';
-import { useEffect, useState } from 'react';
-import { getBackgroundImages } from '../../constants/data';
+import { getBackgroundImages, fetchProjects } from '../../constants/data';
 
-function CollectionPage() {
-    const [bgImage, setBgImage] = useState('');
+async function CollectionPage() {
+    // Fetch all data in parallel
+    const [images, projects] = await Promise.all([
+        getBackgroundImages(),
+        fetchProjects(),
+    ]);
 
-    useEffect(() => {
-        const loadBackgroundImage = async () => {
-            try {
-                const images = await getBackgroundImages();
-                if (images && images.length > 0) {
-                    setBgImage(images[0].image);
-                }
-            } catch (error) {
-                console.error('Error loading background image:', error);
-            }
-        };
-
-        loadBackgroundImage();
-    }, []);
+    const bgImage = images && images.length > 0 ? images[0].image : '';
     return (
         <div>
             <div
@@ -42,7 +29,7 @@ function CollectionPage() {
                 <CollectionHero />
             </div>
 
-            <CollectionCabinets />
+            <CollectionCabinets projects={projects} />
             {/* <CollectionCountertops /> */}
             <div className='bg-white py-32'></div>
         </div>

@@ -27,12 +27,6 @@ export const metadata = {
         ],
         type: 'website',
     },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'Filheim',
-        description: 'Premium Custom Cabinets and Luxury Living Solutions',
-        images: ['/hh.png'],
-    },
 };
 
 // ...existing code...

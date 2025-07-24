@@ -1,8 +1,5 @@
-'use client';
-
 import AboutHero from '../../components/about/AboutHero';
 import Navbar from '../../components/Navbar';
-import { useEffect, useState } from 'react';
 import {
     getBackgroundImages,
     fetchProjects,
@@ -10,99 +7,67 @@ import {
     getCeosImages,
 } from '../../constants/data';
 
-function AboutPage() {
-    const [bgImage, setBgImage] = useState('');
-    const [chooseProjects, setChooseProjects] = useState([]);
-    const [isChooseLoading, setIsChooseLoading] = useState(true);
-    const [ceoData, setCeoData] = useState(null);
-    const [teamMembers, setTeamMembers] = useState([]);
-    const [isTeamLoading, setIsTeamLoading] = useState(true);
+const whyChooseContent = [
+    {
+        title: 'Bespoke Solutions',
+        description:
+            'Tailored to your vision—each space is uniquely crafted to reflect your story.',
+        icon: '01',
+    },
+    {
+        title: 'Premium Materials',
+        description:
+            'We source only the finest finishes and textures that exude sophistication.',
+        icon: '02',
+    },
+    {
+        title: 'Expert Installation',
+        description:
+            'Our seasoned artisans ensure every piece is flawlessly integrated.',
+        icon: '03',
+    },
+    {
+        title: 'Lifetime Support',
+        description:
+            'We stand behind our work with unmatched post-project care and service.',
+        icon: '04',
+    },
+];
 
-    useEffect(() => {
-        const loadData = async () => {
-            try {
-                // Load background image
-                const images = await getBackgroundImages();
-                if (images && images.length > 0) {
-                    setBgImage(images[0].image);
-                }
-
-                // Load projects for Why Choose section
-                setIsChooseLoading(true);
-                const allProjects = await fetchProjects();
-
-                // Create a deterministic shuffle using a seed
-                const seed = 'filheim-choose'; // Using a constant seed for consistent randomization
-                const seededRandom = (str) => {
-                    let h = 1779033703 ^ str.length;
-                    for (let i = 0; i < str.length; i++) {
-                        h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
-                        h = (h << 13) | (h >>> 19);
-                    }
-                    return () => {
-                        h = Math.imul(h ^ (h >>> 16), 2246822507);
-                        h = Math.imul(h ^ (h >>> 13), 3266489909);
-                        return (h ^= h >>> 16) >>> 0;
-                    };
-                };
-
-                const shuffledProjects = [...allProjects]
-                    .sort((a, b) => {
-                        const random = seededRandom(seed + a.id + b.id);
-                        return 0.5 - random() / 4294967296;
-                    })
-                    .slice(0, 4);
-
-                setChooseProjects(shuffledProjects);
-                setIsChooseLoading(false);
-
-                // Load CEO data
-                const ceosData = await getCeosImages();
-                if (ceosData.length > 0) {
-                    setCeoData(ceosData[0]); // Get the first CEO's data
-                }
-
-                // Load team members
-                setIsTeamLoading(true);
-                const teamData = await getTeamImages();
-                setTeamMembers(teamData);
-                setIsTeamLoading(false);
-            } catch (error) {
-                console.error('Error loading data:', error);
-                setIsChooseLoading(false);
-                setIsTeamLoading(false);
-            }
+function shuffleProjects(projects, seed) {
+    const seededRandom = (str) => {
+        let h = 1779033703 ^ str.length;
+        for (let i = 0; i < str.length; i++) {
+            h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+            h = (h << 13) | (h >>> 19);
+        }
+        return () => {
+            h = Math.imul(h ^ (h >>> 16), 2246822507);
+            h = Math.imul(h ^ (h >>> 13), 3266489909);
+            return (h ^= h >>> 16) >>> 0;
         };
+    };
 
-        loadData();
-    }, []);
+    return [...projects]
+        .sort((a, b) => {
+            const random = seededRandom(seed + a.id + b.id);
+            return 0.5 - random() / 4294967296;
+        })
+        .slice(0, 4);
+}
 
-    const whyChooseContent = [
-        {
-            title: 'Bespoke Solutions',
-            description:
-                'Tailored to your vision—each space is uniquely crafted to reflect your story.',
-            icon: '01',
-        },
-        {
-            title: 'Premium Materials',
-            description:
-                'We source only the finest finishes and textures that exude sophistication.',
-            icon: '02',
-        },
-        {
-            title: 'Expert Installation',
-            description:
-                'Our seasoned artisans ensure every piece is flawlessly integrated.',
-            icon: '03',
-        },
-        {
-            title: 'Lifetime Support',
-            description:
-                'We stand behind our work with unmatched post-project care and service.',
-            icon: '04',
-        },
-    ];
+async function AboutPage() {
+    // Fetch all data in parallel
+    const [images, projects, ceosData, teamMembers] = await Promise.all([
+        getBackgroundImages(),
+        fetchProjects(),
+        getCeosImages(),
+        getTeamImages(),
+    ]);
+
+    const bgImage = images && images.length > 0 ? images[0].image : '';
+    const ceoData = ceosData.length > 0 ? ceosData[0] : null;
+    const chooseProjects = shuffleProjects(projects, 'filheim-choose');
 
     return (
         <div className='min-h-screen bg-white text-gray-800'>
@@ -119,12 +84,6 @@ function AboutPage() {
                     <Navbar />
                 </div>
                 <AboutHero />
-
-                {/* <div className="flex flex-col justify-center items-center text-center text-white py-24 animate-fade-in">
-          <h1 className="text-4xl sm:text-7xl font-gotham font-bold mb-6 uppercase text-gold drop-shadow-xl">About Us</h1>
-          <p className="max-w-3xl text-xl sm:text-2xl px-4 text-white/80 italic font-light animate-fade-in animate-delay-200">A story of timeless craftsmanship, design philosophy, and enduring elegance.</p>
-          <div className="mt-8 w-28 h-1 bg-gradient-to-r from-[#C0A86B] via-[#FEECCB] to-[#A68638] rounded-full animate-fade-in animate-delay-300" />
-        </div> */}
             </div>
 
             {/* Our Story Section */}
@@ -150,7 +109,6 @@ function AboutPage() {
             </section>
 
             {/* Founder Section */}
-            {/* Founder Section */}
             <section className='py-24 px-4 sm:px-10 bg-gray-50'>
                 <div className='max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center'>
                     {ceoData ? (
@@ -160,7 +118,7 @@ function AboutPage() {
                             className='w-full max-w-md rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-500 mx-auto h-[80vh]'
                         />
                     ) : (
-                        <div className='w-full h-[600px] rounded-2xl bg-gray-200 animate-pulse' />
+                        <div className='w-full h-[600px] rounded-2xl bg-gray-200' />
                     )}
                     <div className='space-y-6'>
                         <h3
@@ -205,39 +163,29 @@ function AboutPage() {
                     <div className='mt-6 w-24 h-1 bg-gradient-to-r from-[#C0A86B] via-[#FEECCB] to-[#A68638] mx-auto' />
                 </div>
                 <div className='grid md:grid-cols-2 gap-12 max-w-6xl mx-auto'>
-                    {isChooseLoading
-                        ? // Loading skeletons
-                          [...Array(4)].map((_, idx) => (
-                              <div
-                                  key={`skeleton-${idx}`}
-                                  className='animate-pulse rounded-2xl overflow-hidden border border-white/10'
-                              >
-                                  <div className='w-full h-64 bg-gray-700'></div>
-                              </div>
-                          ))
-                        : chooseProjects.map((project, idx) => {
-                              const content = whyChooseContent[idx];
-                              return (
-                                  <div
-                                      key={idx}
-                                      className='group relative rounded-2xl overflow-hidden border border-white/10 shadow-md hover:shadow-xl transition-all duration-300'
-                                  >
-                                      <img
-                                          src={project.image}
-                                          alt={content.title}
-                                          className='w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500'
-                                      />
-                                      <div className='absolute inset-0 bg-black/60 p-6 flex flex-col justify-end backdrop-blur-sm'>
-                                          <h3 className='text-2xl font-gotham font-bold text-white mb-2'>
-                                              {content.title}
-                                          </h3>
-                                          <p className='text-white/90 font-light'>
-                                              {content.description}
-                                          </p>
-                                      </div>
-                                  </div>
-                              );
-                          })}
+                    {chooseProjects.map((project, idx) => {
+                        const content = whyChooseContent[idx];
+                        return (
+                            <div
+                                key={idx}
+                                className='group relative rounded-2xl overflow-hidden border border-white/10 shadow-md hover:shadow-xl transition-all duration-300'
+                            >
+                                <img
+                                    src={project.image}
+                                    alt={content.title}
+                                    className='w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500'
+                                />
+                                <div className='absolute inset-0 bg-black/60 p-6 flex flex-col justify-end backdrop-blur-sm'>
+                                    <h3 className='text-2xl font-gotham font-bold text-white mb-2'>
+                                        {content.title}
+                                    </h3>
+                                    <p className='text-white/90 font-light'>
+                                        {content.description}
+                                    </p>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </section>
 
@@ -260,42 +208,28 @@ function AboutPage() {
                     <div className='mt-6 w-24 h-1 bg-gradient-to-r from-[#C0A86B] via-[#FEECCB] to-[#A68638] mx-auto' />
                 </div>
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto'>
-                    {isTeamLoading
-                        ? // Loading skeletons
-                          [...Array(4)].map((_, i) => (
-                              <div
-                                  key={`skeleton-${i}`}
-                                  className='animate-pulse'
-                              >
-                                  <div className='bg-gray-200 h-64 sm:h-72 rounded-xl'></div>
-                                  <div className='p-4'>
-                                      <div className='h-4 bg-gray-200 rounded w-3/4 mx-auto mb-2'></div>
-                                      <div className='h-3 bg-gray-200 rounded w-1/2 mx-auto'></div>
-                                  </div>
-                              </div>
-                          ))
-                        : teamMembers.map((member, i) => (
-                              <div
-                                  key={i}
-                                  className='group overflow-hidden rounded-xl shadow hover:shadow-xl transition-all'
-                              >
-                                  <div className='aspect-w-4 aspect-h-5 relative'>
-                                      <img
-                                          src={member.image}
-                                          alt={member.name}
-                                          className='w-full h-64 sm:h-72 object-cover group-hover:scale-105 transition-transform duration-300'
-                                      />
-                                  </div>
-                                  <div className='p-4 text-center'>
-                                      <h4 className='font-semibold text-lg text-gray-800'>
-                                          {member.name}
-                                      </h4>
-                                      <p className='text-sm text-gray-500'>
-                                          {member.position}
-                                      </p>
-                                  </div>
-                              </div>
-                          ))}
+                    {teamMembers.map((member, i) => (
+                        <div
+                            key={i}
+                            className='group overflow-hidden rounded-xl shadow hover:shadow-xl transition-all'
+                        >
+                            <div className='aspect-w-4 aspect-h-5 relative'>
+                                <img
+                                    src={member.image}
+                                    alt={member.name}
+                                    className='w-full h-64 sm:h-72 object-cover group-hover:scale-105 transition-transform duration-300'
+                                />
+                            </div>
+                            <div className='p-4 text-center'>
+                                <h4 className='font-semibold text-lg text-gray-800'>
+                                    {member.name}
+                                </h4>
+                                <p className='text-sm text-gray-500'>
+                                    {member.position}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </section>
         </div>

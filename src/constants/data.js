@@ -1,173 +1,104 @@
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+const REVALIDATE_TIME = 3600; // 1 hour in seconds
+const DEFAULT_IMAGE = '/cc.png';
 
-export const fetchProjects = async () => {
+/**
+ * Fetches data from Strapi API with consistent error handling and caching
+ * @param {string} endpoint - The API endpoint to fetch from
+ * @param {Object} options - Additional fetch options
+ * @param {Function} processData - Function to process the response data
+ * @returns {Promise<Array>} Processed data array
+ */
+async function fetchFromStrapi(endpoint, options = {}, processData) {
     try {
-        const res = await fetch(
-            `${STRAPI_URL}/api/galleries?populate=image&pagination[limit]=1000`
-        );
-        const data = await res.json();
+        // Extract the model name from the endpoint (e.g., 'galleries' from 'galleries?populate=image')
+        const model = endpoint.split('?')[0];
 
-        return data.data.map((project) => ({
-            id: project.id,
-            name: project.name,
-            image: project.image?.url ? project.image.url : '/cc.png', // fallback image
-        }));
-    } catch (error) {
-        console.error('Error fetching projects:', error);
-        return [];
-    }
-};
+        // In development: no cache, in production: use cache with tags
+        const fetchOptions =
+            process.env.NODE_ENV === 'development'
+                ? { cache: 'no-store' } // Disable cache in development
+                : { next: { tags: [model] } }; // Use cache with tags in production
 
-export async function getBackgroundImages() {
-    try {
-        const res = await fetch(
-            `${STRAPI_URL}/api/background-images?populate=image`
-        );
+        const res = await fetch(`${STRAPI_URL}/api/${endpoint}`, {
+            ...fetchOptions,
+            ...options,
+        });
         const data = await res.json();
 
         if (!res.ok) {
             throw new Error(
-                data?.error?.message || 'Failed to fetch background images'
+                data?.error?.message || `Failed to fetch ${endpoint}`
             );
         }
 
-        // Extract only image URLs
-        return data.data.map((item) => ({
+        return processData ? processData(data.data) : data.data;
+    } catch (error) {
+        console.error(`Error fetching ${endpoint}:`, error.message);
+        return [];
+    }
+}
+
+/**
+ * Fetches all projects from the gallery
+ * @returns {Promise<Array<{id: string, name: string, image: string}>>}
+ */
+export const fetchProjects = () =>
+    fetchFromStrapi(
+        'galleries?populate=image&pagination[limit]=1000',
+        {},
+        (data) =>
+            data.map((project) => ({
+                id: project.id,
+                name: project.name,
+                image: project.image?.url || DEFAULT_IMAGE,
+            }))
+    );
+
+/**
+ * Fetches background images
+ * @returns {Promise<Array<{name: string, image: string}>>}
+ */
+export const getBackgroundImages = () =>
+    fetchFromStrapi('background-images?populate=image', {}, (data) =>
+        data.map((item) => ({
             name: item.name,
-            image: item.image?.url ? item.image.url : '/cc.png', // fallback image
-        }));
-    } catch (error) {
-        console.error('Error fetching background images:', error.message);
-        return [];
-    }
-}
+            image: item.image?.url || DEFAULT_IMAGE,
+        }))
+    );
 
-export async function getAsideImages() {
-    try {
-        const res = await fetch(`${STRAPI_URL}/api/asides?populate=image`);
-        const data = await res.json();
+/**
+ * Fetches aside images for sections
+ * @returns {Promise<Array<{image: string}>>}
+ */
+export const getAsideImages = () =>
+    fetchFromStrapi('asides?populate=image', {}, (data) =>
+        data.map((item) => ({
+            image: item.image?.url || DEFAULT_IMAGE,
+        }))
+    );
 
-        if (!res.ok) {
-            throw new Error(
-                data?.error?.message || 'Failed to fetch background images'
-            );
-        }
-
-        // Extract only image URLs
-        return data.data.map((item) => ({
-            image: item.image?.url ? item.image.url : '/cc.png', // fallback image
-        }));
-    } catch (error) {
-        console.error('Error fetching background images:', error.message);
-        return [];
-    }
-}
-
-export async function getCeosImages() {
-    try {
-        const res = await fetch(`${STRAPI_URL}/api/ceos?populate=image`);
-        const data = await res.json();
-
-        if (!res.ok) {
-            throw new Error(
-                data?.error?.message || 'Failed to fetch CEO images'
-            );
-        }
-
-        // Extract only image URLs
-        return data.data.map((item) => ({
+/**
+ * Fetches CEO information and images
+ * @returns {Promise<Array<{name: string, image: string}>>}
+ */
+export const getCeosImages = () =>
+    fetchFromStrapi('ceos?populate=image', {}, (data) =>
+        data.map((item) => ({
             name: item.name,
+            image: item.image?.url || DEFAULT_IMAGE,
+        }))
+    );
 
-            image: item.image?.url ? item.image.url : '/cc.png', // fallback image
-        }));
-    } catch (error) {
-        console.error('Error fetching CEO images:', error.message);
-        return [];
-    }
-}
-
-export async function getTeamImages() {
-    try {
-        const res = await fetch(`${STRAPI_URL}/api/teams?populate=image`);
-        const data = await res.json();
-
-        if (!res.ok) {
-            throw new Error(
-                data?.error?.message || 'Failed to fetch team images'
-            );
-        }
-
-        // Extract only image URLs
-        return data.data.map((item) => ({
+/**
+ * Fetches team members information and images
+ * @returns {Promise<Array<{name: string, position: string, image: string}>>}
+ */
+export const getTeamImages = () =>
+    fetchFromStrapi('teams?populate=image', {}, (data) =>
+        data.map((item) => ({
             name: item.name,
             position: item.position,
-            image: item.image?.url ? item.image.url : '/cc.png', // fallback image
-        }));
-    } catch (error) {
-        console.error('Error fetching team images:', error.message);
-        return [];
-    }
-}
-
-export const projects = [
-    {
-        id: 1,
-        category: 'Minimalist',
-        title: 'Minimalist',
-        image: '/cc.png',
-    },
-    {
-        id: 2,
-        category: 'Black and White',
-        title: 'Black and White',
-        image: '/cc-2.jpg',
-    },
-    {
-        id: 3,
-        category: 'Concord',
-        title: 'Concord',
-        image: '/cc-3.jpg',
-    },
-    {
-        id: 4,
-        category: 'Modern',
-        title: 'Modern',
-        image: '/cc-4.jpg',
-    },
-    {
-        id: 5,
-        category: 'Luxury',
-        title: 'Luxury',
-        image: '/cc.png',
-    },
-    {
-        id: 6,
-        category: 'Classic',
-        title: 'Classic',
-        image: '/cc-2.jpg',
-    },
-    {
-        id: 7,
-        category: 'Concord',
-        title: 'Concord',
-        image: '/cc-3.jpg',
-    },
-    {
-        id: 8,
-        category: 'Minimalist',
-        title: 'Minimalist',
-        image: '/cc-4.jpg',
-    },
-    {
-        id: 9,
-        category: 'Commercial',
-        title: 'Commercial',
-        image: '/cc.png',
-    },
-    {
-        id: 10,
-        category: 'Industrial',
-        title: 'Industrial',
-        image: '/cc-2.jpg',
-    },
-];
+            image: item.image?.url || DEFAULT_IMAGE,
+        }))
+    );

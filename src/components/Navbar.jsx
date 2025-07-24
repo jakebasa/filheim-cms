@@ -43,9 +43,11 @@ function Navbar({
             }
         }
 
-        document.addEventListener('mousedown', handleClickOutside);
-        return () =>
-            document.removeEventListener('mousedown', handleClickOutside);
+        if (typeof window !== 'undefined' && menuOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+            return () =>
+                document.removeEventListener('mousedown', handleClickOutside);
+        }
     }, [menuOpen]);
 
     const textColor = theme === 'dark' ? 'text-white' : 'text-gray-900';

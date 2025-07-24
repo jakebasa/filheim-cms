@@ -1,28 +1,4 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import { getBackgroundImages } from '../../constants/data';
-
-function HomepageIntro2() {
-    const [bgImage, setBgImage] = useState('');
-
-    useEffect(() => {
-        const loadBackgroundImage = async () => {
-            try {
-                const images = await getBackgroundImages();
-                const bg1Image = images.find(
-                    (img) => img.name === 'bg-overview'
-                );
-                if (bg1Image) {
-                    setBgImage(bg1Image.image);
-                }
-            } catch (error) {
-                console.error('Error loading background image:', error);
-            }
-        };
-
-        loadBackgroundImage();
-    }, []);
+function HomepageIntro2({ bgImage }) {
     return (
         <section id='collection-hero' className=''>
             <div className='flex justify-center items-center text-left'>

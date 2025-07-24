@@ -1,5 +1,3 @@
-'use client';
-
 import HomepageS2 from '../components/home/HomepageS2';
 import HomepageS1 from '../components/home/HomepageS1';
 import HomepageCTA from '../components/home/HomepageCTA';
@@ -7,27 +5,29 @@ import HomepageProducts from '../components/home/HomepageProducts';
 import HomepageIntro2 from '../components/home/HomepageIntro2';
 import HomepageOtherLayout from '../components/home/HomepageOtherLayout';
 import Navbar from '../components/Navbar';
-import { useEffect, useState } from 'react';
-import { getBackgroundImages } from '../constants/data';
+import {
+    getBackgroundImages,
+    getAsideImages,
+    fetchProjects,
+} from '../constants/data';
 
-export const Home = () => {
-    const [bgImage, setBgImage] = useState('');
+async function Home() {
+    const [images, asideImages, allProjects] = await Promise.all([
+        getBackgroundImages(),
+        getAsideImages(),
+        fetchProjects(),
+    ]);
+    const bg1Image = images.find((img) => img.name === 'bg1');
+    const bgImage = bg1Image ? bg1Image.image : '';
+    const bgOverviewImage = images.find((img) => img.name === 'bg-overview');
+    const overviewImage = bgOverviewImage ? bgOverviewImage.image : '';
 
-    useEffect(() => {
-        const loadBackgroundImage = async () => {
-            try {
-                const images = await getBackgroundImages();
-                const bg1Image = images.find((img) => img.name === 'bg1');
-                if (bg1Image) {
-                    setBgImage(bg1Image.image);
-                }
-            } catch (error) {
-                console.error('Error loading background image:', error);
-            }
-        };
-
-        loadBackgroundImage();
-    }, []);
+    // Take first 8 projects for HomepageProducts
+    const featuredProjects = allProjects.slice(0, 8).map((project) => ({
+        id: project.id,
+        image: project.image,
+        title: project.name || 'Featured Project',
+    }));
     return (
         <div>
             <div
@@ -45,13 +45,13 @@ export const Home = () => {
                 <HomepageS1 />
             </div>
 
-            <HomepageS2 />
-            <HomepageIntro2 />
-            <HomepageProducts />
-            <HomepageOtherLayout />
+            <HomepageS2 asideImage={asideImages[0]?.image} />
+            <HomepageIntro2 bgImage={overviewImage} />
+            <HomepageProducts projects={featuredProjects} />
+            <HomepageOtherLayout projects={allProjects} />
             <HomepageCTA />
         </div>
     );
-};
+}
 
 export default Home;

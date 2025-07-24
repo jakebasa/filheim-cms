@@ -4,6 +4,7 @@ import { FaLocationDot } from 'react-icons/fa6';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { AiFillInstagram, AiFillTikTok } from 'react-icons/ai';
 import Link from 'next/link';
+import Copyright from './Copyright';
 
 function Footer() {
     return (
@@ -47,25 +48,22 @@ function Footer() {
                                 Social
                             </span>
                             <div className='flex items-center mt-1 space-x-2'>
-                                <a href='#' aria-label='Twitter'>
-                                    <FaTwitter
-                                        className='text-gray-900'
-                                        size={24}
-                                    />
-                                </a>
-                                <a href='#' aria-label='Instagram'>
+                                <a
+                                    href='https://www.instagram.com/filheim_ph'
+                                    aria-label='Instagram'
+                                    target='_blank'
+                                >
                                     <AiFillInstagram
                                         className='text-gray-900'
                                         size={24}
                                     />
                                 </a>
-                                <a href='#' aria-label='TikTok'>
-                                    <AiFillTikTok
-                                        className='text-gray-900'
-                                        size={24}
-                                    />
-                                </a>
-                                <a href='#' aria-label='Facebook'>
+
+                                <a
+                                    href='https://www.facebook.com/people/Filheim/61576680338319/#'
+                                    aria-label='Facebook'
+                                    target='_blank'
+                                >
                                     <FaFacebookSquare
                                         className='text-gray-900'
                                         size={24}
@@ -136,7 +134,7 @@ function Footer() {
                                         title='Our phone'
                                         className='text-black'
                                     >
-                                        (02)123-5021
+                                        +639171879298
                                     </a>
                                 </div>
                                 <div className='flex gap-2 items-center'>
@@ -158,7 +156,7 @@ function Footer() {
                                         title='Our phone'
                                         className='text-black'
                                     >
-                                        123 Abc St. Manila, PH
+                                        Metro Manila, Philippines
                                     </a>
                                 </div>
                             </div>
@@ -166,14 +164,8 @@ function Footer() {
                     </div>
                 </div>
             </div>
-            <div className='bg-gray-800 text-white p-4'>
-                <div className='container mx-auto flex flex-row justify-between max-w-screen-xl px-4'>
-                    <p>
-                        &copy; {new Date().getFullYear()} Filheim. All rights
-                        reserved.
-                    </p>
-                </div>
-            </div>
+            {/* copyright */}
+            <Copyright />
         </footer>
     );
 }

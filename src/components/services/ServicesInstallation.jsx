@@ -1,27 +1,8 @@
 'use client';
 
 import { SiMaterialformkdocs } from 'react-icons/si';
-import { useState, useEffect } from 'react';
-import { getAsideImages } from '../../constants/data';
 
-function ServicesInstallation() {
-    const [image, setImage] = useState(null);
-
-    useEffect(() => {
-        const loadImage = async () => {
-            try {
-                const images = await getAsideImages();
-                if (images && images.length > 0) {
-                    setImage(images[2].image || null);
-                }
-            } catch (error) {
-                console.error('Error loading background image:', error);
-            }
-        };
-
-        loadImage();
-    }, []);
-
+function ServicesInstallation({ asideImage }) {
     return (
         <section
             id='collection-cabinets'
@@ -33,15 +14,11 @@ function ServicesInstallation() {
                         <div className='grid grid-cols-1 md:grid-cols-2 items-start gap-8'>
                             {/* Left Image */}
                             <div className='flex justify-center md:justify-end items-end'>
-                                {image ? (
-                                    <img
-                                        src={image}
-                                        alt='Installation'
-                                        className='h-[500px] w-[450px] object-cover rounded-xl shadow-lg'
-                                    />
-                                ) : (
-                                    <div className='h-[500px] w-[450px] bg-gray-200 animate-pulse rounded-xl' />
-                                )}
+                                <img
+                                    src={asideImage}
+                                    alt='Installation'
+                                    className='h-[500px] w-[450px] object-cover rounded-xl shadow-lg'
+                                />
                             </div>
 
                             {/* Right Content */}

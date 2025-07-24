@@ -1,24 +1,4 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { getAsideImages } from '../../constants/data';
-
-function HomepageS2() {
-    const [image, setImage] = useState(null);
-
-    useEffect(() => {
-        const loadImage = async () => {
-            try {
-                const images = await getAsideImages();
-                if (images && images.length > 0) {
-                    setImage(images[0].image || null); // Ensure null if image is empty string
-                }
-            } catch (error) {
-                console.error('Error loading background image:', error);
-            }
-        };
-
-        loadImage();
-    }, []);
+function HomepageS2({ asideImage }) {
     return (
         <section id='collection-hero' className='py-24'>
             <div className='flex justify-center items-center text-left'>
@@ -51,11 +31,12 @@ function HomepageS2() {
                                                 }}
                                             >
                                                 <p className='text-lg max-w-2xl'>
-                                                    A luxury furniture brand
-                                                    redefining cabinetry and
-                                                    home design with world-class
-                                                    quality, bespoke catalogues,
-                                                    and enduring style.
+                                                    A luxury cabinetry brand
+                                                    redefining home design
+                                                    through world-class
+                                                    craftsmanship, bespoke
+                                                    catalogues, and enduring
+                                                    style.
                                                 </p>
                                                 <p className='text-lg max-w-2xl mt-2'>
                                                     Filheim appeals to
@@ -85,9 +66,9 @@ function HomepageS2() {
 
                                         <div className=''>
                                             <div className='flex w-full'>
-                                                {image ? (
+                                                {asideImage ? (
                                                     <img
-                                                        src={image}
+                                                        src={asideImage}
                                                         alt='Home About Filheim Img'
                                                         className='h-[500px] w-full object-cover'
                                                     />

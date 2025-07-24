@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -8,29 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 
-import { fetchProjects } from '../../constants/data';
-
-function HomepageOtherLayout() {
-    const [projects, setProjects] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const loadProjects = async () => {
-            try {
-                setIsLoading(true);
-                const fetchedProjects = await fetchProjects();
-                setProjects(fetchedProjects);
-            } catch (error) {
-                console.error('Error fetching projects:', error);
-                setProjects([]);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        loadProjects();
-    }, []);
-
+function HomepageOtherLayout({ projects }) {
     return (
         <section id='home-products' className='py-20'>
             <div className='flex justify-center items-center text-center'>
@@ -76,24 +54,17 @@ function HomepageOtherLayout() {
                     }}
                     className='mySwiper'
                 >
-                    {isLoading
-                        ? // Loading skeletons
-                          [...Array(5)].map((_, index) => (
-                              <SwiperSlide key={`skeleton-${index}`}>
-                                  <div className='h-96 bg-gray-200 rounded-sm animate-pulse'></div>
-                              </SwiperSlide>
-                          ))
-                        : projects.map((project) => (
-                              <SwiperSlide key={project.id}>
-                                  <div className='h-96 rounded-sm overflow-hidden'>
-                                      <img
-                                          src={project.image}
-                                          alt={project.title || 'Project Image'}
-                                          className='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
-                                      />
-                                  </div>
-                              </SwiperSlide>
-                          ))}
+                    {projects.map((project) => (
+                        <SwiperSlide key={project.id}>
+                            <div className='h-96 rounded-sm overflow-hidden'>
+                                <img
+                                    src={project.image}
+                                    alt={project.title || 'Project Image'}
+                                    className='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
+                                />
+                            </div>
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
 
