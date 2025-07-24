@@ -129,7 +129,7 @@ function Footer() {
                                 <div className='flex gap-2 items-center'>
                                     <FaPhoneAlt className='text-gray-900' />
                                     <a
-                                        href='tel:850-123-5021'
+                                        href='tel:+639171879298'
                                         aria-label='Our phone'
                                         title='Our phone'
                                         className='text-black'
