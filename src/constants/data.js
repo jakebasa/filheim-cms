@@ -11,14 +11,14 @@ async function fetchFromStrapi(endpoint, options = {}, processData) {
             process.env.NODE_ENV === 'development'
                 ? { cache: 'no-store' }
                 : {
-                      cache: 'force-cache',
+                      cache: 'force-cache', // Keep strong caching
                       headers: {
                           'Cache-Control':
-                              'public, s-maxage=3600, stale-while-revalidate=86400',
+                              'public, s-maxage=3600, stale-while-revalidate',
                       },
                       next: {
-                          tags: [model],
-                          revalidate: 3600,
+                          tags: [model], // Keep it simple with just the model tag
+                          revalidate: 3600, // Fallback hourly revalidation
                       },
                   };
 

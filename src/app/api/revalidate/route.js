@@ -31,13 +31,31 @@ export async function POST(request) {
             );
         }
 
-        console.log('🟢 Webhook triggered for model:', model);
+        console.log(
+            '🟢 Webhook triggered for model:',
+            model,
+            'at:',
+            new Date().toISOString()
+        );
+        console.log(
+            '📨 Webhook headers:',
+            Object.fromEntries(headersList.entries())
+        );
+        console.log('📦 Webhook body:', body);
 
+        // Force immediate revalidation
         await revalidateTag(model);
+        console.log('✅ Tag revalidated:', model);
 
         const pathsToRevalidate = {
-            galleries: ['/collection'],
-            'background-images': ['/'],
+            galleries: ['/collection', '/', '/services'],
+            'background-images': [
+                '/',
+                '/about',
+                '/collection',
+                '/services',
+                '/contact',
+            ],
             asides: ['/', '/about', '/services'],
             ceos: ['/about'],
             teams: ['/about'],
@@ -45,9 +63,21 @@ export async function POST(request) {
 
         if (pathsToRevalidate[model]) {
             console.log('🔁 Revalidating paths:', pathsToRevalidate[model]);
-            await Promise.all(
-                pathsToRevalidate[model].map((path) => revalidatePath(path))
-            );
+
+            // Force immediate revalidation of all paths
+            for (const path of pathsToRevalidate[model]) {
+                await revalidatePath(path);
+                // Also revalidate the path with a trailing slash
+                if (!path.endsWith('/')) {
+                    await revalidatePath(path + '/');
+                }
+                console.log('✅ Path revalidated:', path);
+            }
+
+            // Force cache purge
+            await revalidateTag('layout');
+            await revalidateTag('page');
+            console.log('🧹 Cache purged for layout and page tags');
         }
 
         return Response.json(
