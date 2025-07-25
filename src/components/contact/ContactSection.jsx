@@ -69,18 +69,23 @@ export default function ContactSection() {
     };
 
     return (
-        <section className='px-4 sm:px-6 py-16 sm:py-20 flex justify-center items-center min-h-[80vh]'>
+        <section className='px-4 sm:px-6 py-16 sm:py-20 flex justify-center items-center min-h-[80vh] bg-gradient-to-b from-gray-50 to-gray-100'>
             <div className='w-full max-w-xl mx-auto'>
                 <form
                     onSubmit={handleSubmit}
-                    className='bg-white text-[#2f2f2f] p-6 sm:p-8 rounded-xl space-y-6 shadow-xl transition-transform duration-500 hover:scale-[1.02] w-full'
+                    className='bg-white text-[#2f2f2f] p-8 sm:p-10 rounded-xl space-y-6 shadow-2xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(154,120,66,0.2)] border border-[#9A7842]/10 backdrop-blur-sm'
                 >
-                    <h2
-                        className='text-xl sm:text-2xl font-bold mb-4 text-[#b0984b] uppercase'
-                        style={{ fontFamily: "'Inter', sans-serif" }}
-                    >
-                        Inquire Now
-                    </h2>
+                    <div className='text-center mb-8'>
+                        <h2
+                            className='text-2xl sm:text-3xl font-bold mb-3 text-[#9A7842] uppercase'
+                            style={{ fontFamily: "'Inter', sans-serif" }}
+                        >
+                            Inquire Now
+                        </h2>
+                        <p className='text-gray-600'>
+                            We'll get back to you within 24 hours
+                        </p>
+                    </div>
                     <div>
                         <input
                             type='email'
@@ -88,12 +93,12 @@ export default function ContactSection() {
                             placeholder='Email'
                             value={formData.email}
                             onChange={handleChange}
-                            className='w-full text-sm p-3 sm:p-4 rounded border border-gray-300 focus:border-[#b0984b] focus:ring-[#b0984b]/40 focus:ring-2'
+                            className='w-full text-sm p-4 rounded-lg border border-gray-200 focus:border-[#9A7842] focus:ring-[#9A7842]/20 focus:ring-4 bg-gray-50/50 hover:bg-white transition-colors duration-300'
                             disabled={isLoading}
                             autoComplete='email'
                         />
                         {errors.email && (
-                            <p className='text-red-500 text-sm mt-1'>
+                            <p className='text-red-500 text-sm mt-2 ml-1'>
                                 {errors.email}
                             </p>
                         )}
@@ -105,12 +110,12 @@ export default function ContactSection() {
                             placeholder='Name'
                             value={formData.name}
                             onChange={handleChange}
-                            className='w-full text-sm p-3 sm:p-4 rounded border border-gray-300 focus:border-[#b0984b] focus:ring-[#b0984b]/40 focus:ring-2'
+                            className='w-full text-sm p-4 rounded-lg border border-gray-200 focus:border-[#9A7842] focus:ring-[#9A7842]/20 focus:ring-4 bg-gray-50/50 hover:bg-white transition-colors duration-300'
                             disabled={isLoading}
                             autoComplete='name'
                         />
                         {errors.name && (
-                            <p className='text-red-500 text-sm mt-1'>
+                            <p className='text-red-500 text-sm mt-2 ml-1'>
                                 {errors.name}
                             </p>
                         )}
@@ -122,24 +127,24 @@ export default function ContactSection() {
                             rows='5'
                             value={formData.message}
                             onChange={handleChange}
-                            className='w-full text-sm p-3 sm:p-4 rounded border border-gray-300 focus:border-[#b0984b] focus:ring-[#b0984b]/40 focus:ring-2'
+                            className='w-full text-sm p-4 rounded-lg border border-gray-200 focus:border-[#9A7842] focus:ring-[#9A7842]/20 focus:ring-4 bg-gray-50/50 hover:bg-white transition-colors duration-300'
                             disabled={isLoading}
                         ></textarea>
                         {errors.message && (
-                            <p className='text-red-500 text-sm mt-1'>
+                            <p className='text-red-500 text-sm mt-2 ml-1'>
                                 {errors.message}
                             </p>
                         )}
                     </div>
                     {errors.submit && (
-                        <p className='text-red-500 text-sm mt-1'>
+                        <p className='text-red-500 text-sm mt-4 text-center'>
                             {errors.submit}
                         </p>
                     )}
                     <button
                         type='submit'
                         disabled={isLoading}
-                        className={`text-white font-semibold text-sm px-6 py-3 rounded transition bg-[#9A7842] hover:bg-[#7a5f34] hover:scale-105 ${
+                        className={`w-full text-white font-semibold text-sm px-6 py-4 rounded-lg mt-4 transition-all duration-300 bg-gradient-to-r from-[#9A7842] to-[#b0984b] hover:from-[#7a5f34] hover:to-[#9A7842] hover:shadow-lg hover:shadow-[#9A7842]/20 ${
                             isLoading ? 'opacity-60 cursor-not-allowed' : ''
                         }`}
                     >
