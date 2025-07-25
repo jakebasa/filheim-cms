@@ -10,7 +10,7 @@ function HomepageS1() {
                 <div className='space-y-4'>
                     <div className='flex flex-col items-center'>
                         <img
-                            src={'/bronze_logo.png'}
+                            src={'/logo-bronze.png'}
                             alt='Filheim Logo'
                             className='w-auto max-h-12 object-cover transition-transform duration-300'
                         />
