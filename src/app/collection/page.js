@@ -2,6 +2,7 @@ import CollectionCabinets from '../../components/collections/CollectionCabinets'
 import CollectionHero from '../../components/collections/CollectionHero';
 import Navbar from '../../components/Navbar';
 import { getBackgroundImages, fetchProjects } from '../../constants/data';
+import CollectionCountertops from '../../components/collections/CollectionCountertops';
 
 async function CollectionPage() {
     // Fetch all data in parallel
@@ -9,6 +10,14 @@ async function CollectionPage() {
         getBackgroundImages(),
         fetchProjects(),
     ]);
+
+    // const cabinetProjects = projects.filter(
+    //     (project) => !project.name.toLowerCase().includes('countertop')
+    // );
+
+    // const countertopProjects = projects.filter((project) =>
+    //     project.name.toLowerCase().includes('countertop')
+    // );
 
     const bgImage = images && images.length > 0 ? images[0].image : '';
     return (
@@ -30,7 +39,7 @@ async function CollectionPage() {
             </div>
 
             <CollectionCabinets projects={projects} />
-            {/* <CollectionCountertops /> */}
+            <CollectionCountertops projects={projects} />
             <div className='bg-white py-32'></div>
         </div>
     );

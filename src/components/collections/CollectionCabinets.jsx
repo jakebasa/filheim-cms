@@ -60,7 +60,7 @@ function CollectionCabinets({ projects = [] }) {
                                 >
                                     <img
                                         src={item.image}
-                                        alt={item.title}
+                                        alt={item.name}
                                         className='w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105'
                                     />
                                     <div className='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300' />
