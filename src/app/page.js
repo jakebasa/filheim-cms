@@ -5,6 +5,7 @@ import HomepageProducts from '../components/home/HomepageProducts';
 import HomepageIntro2 from '../components/home/HomepageIntro2';
 import HomepageOtherLayout from '../components/home/HomepageOtherLayout';
 import Navbar from '../components/Navbar';
+import HeroSlider from '../components/home/HeroSlider';
 import {
     getBackgroundImages,
     getAsideImages,
@@ -30,20 +31,12 @@ async function Home() {
     }));
     return (
         <div>
-            <div
-                style={{
-                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(${bgImage})`,
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                    minHeight: '700px',
-                }}
-            >
+            <HeroSlider images={images}>
                 <div className='absolute top-0 left-0 w-full z-50 text-white'>
                     <Navbar />
                 </div>
                 <HomepageS1 />
-            </div>
+            </HeroSlider>
 
             <HomepageS2 asideImage={asideImages[0]?.image} />
             <HomepageIntro2 bgImage={overviewImage} />

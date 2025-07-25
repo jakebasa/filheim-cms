@@ -39,7 +39,7 @@ export const metadata = {
     },
 };
 
-// ...existing code...
+
 export default function RootLayout({ children }) {
     return (
         <html lang='en'>

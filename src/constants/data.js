@@ -17,7 +17,7 @@ async function fetchFromStrapi(endpoint, options = {}, processData) {
                               'public, s-maxage=3600, stale-while-revalidate',
                       },
                       next: {
-                          tags: [model], // Keep it simple with just the model tag
+                          tags: [model], 
                           revalidate: 3600, // Fallback hourly revalidation
                       },
                   };
@@ -45,7 +45,6 @@ async function fetchFromStrapi(endpoint, options = {}, processData) {
     }
 }
 
-// All other functions remain unchanged
 export const fetchProjects = () =>
     fetchFromStrapi(
         'galleries?populate=image&pagination[limit]=1000',

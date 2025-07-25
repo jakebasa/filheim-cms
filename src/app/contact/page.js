@@ -5,7 +5,7 @@ import NewsletterForm from '../../components/contact/NewsletterForm';
 
 async function ContactPage() {
     const images = await getBackgroundImages();
-    const bg1Image = images.find((img) => img.name === 'bg-contact');
+    const bg1Image = images.find((img) => img.name === 'bg-overview');
     const bgImage = bg1Image ? bg1Image.image : '';
 
     return (
