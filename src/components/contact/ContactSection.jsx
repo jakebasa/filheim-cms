@@ -69,8 +69,8 @@ export default function ContactSection() {
     };
 
     return (
-        <section className='px-4 sm:px-6 py-16 sm:py-20'>
-            <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start'>
+        <section className='px-4 sm:px-6 py-16 sm:py-20 flex justify-center items-center min-h-[80vh]'>
+            <div className='w-full max-w-xl mx-auto'>
                 <form
                     onSubmit={handleSubmit}
                     className='bg-white text-[#2f2f2f] p-6 sm:p-8 rounded-xl space-y-6 shadow-xl transition-transform duration-500 hover:scale-[1.02] w-full'
@@ -146,23 +146,6 @@ export default function ContactSection() {
                         {isLoading ? 'Sending Inquiry...' : 'Inquire Now'}
                     </button>
                 </form>
-
-                <div className='animate-fade-in delay-300 w-full'>
-                    <h2
-                        className='text-xl sm:text-2xl font-semibold mb-4 text-[#b0984b]'
-                        style={{ fontFamily: "'Inter', sans-serif" }}
-                    >
-                        Showroom Map
-                    </h2>
-                    <iframe
-                        title='Showroom Location'
-                        src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247863.95434197688!2d120.91750353036972!3d14.535878636007991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c83b3e2c48f7%3A0x4a0ed6c5a1cea809!2sNCR%2C%20Metro%20Manila!5e0!3m2!1sen!2sph!4v1690201789012!5m2!1sen!2sph'
-                        className='w-full h-64 sm:h-80 rounded shadow-md border-0'
-                        allowFullScreen=''
-                        loading='lazy'
-                        referrerPolicy='no-referrer-when-downgrade'
-                    ></iframe>
-                </div>
             </div>
         </section>
     );
