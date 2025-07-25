@@ -24,6 +24,16 @@ export async function POST(request) {
         }
         model = model.toLowerCase();
 
+        // Handle singular/plural forms
+        const modelMappings = {
+            ceo: 'ceos',
+            team: 'teams',
+            gallery: 'galleries',
+            'background-image': 'background-images',
+            aside: 'asides',
+        };
+        model = modelMappings[model] || model;
+
         if (!model) {
             return Response.json(
                 { message: 'Model not found in webhook payload' },
@@ -57,7 +67,7 @@ export async function POST(request) {
                 '/contact',
             ],
             asides: ['/', '/about', '/services'],
-            ceos: ['/about'],
+            ceos: ['/', '/about'], // Added home page since CEO might appear there too
             teams: ['/about'],
         };
 
