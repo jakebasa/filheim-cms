@@ -132,10 +132,10 @@ async function AboutPage() {
                             className='text-gray-700 text-lg leading-relaxed'
                             style={{ fontFamily: "'Inter', sans-serif" }}
                         >
-                            Marcus established Filheim with the belief that true
-                            luxury should be personal, purposeful, and enduring.
-                            His philosophy is evident in every detail we
-                            deliver—meticulous, meaningful, and unmistakably
+                            Alexander established Filheim with the belief that
+                            true luxury should be personal, purposeful, and
+                            enduring. His philosophy is evident in every detail
+                            we deliver—meticulous, meaningful, and unmistakably
                             bespoke.
                         </p>
                     </div>
@@ -213,7 +213,7 @@ async function AboutPage() {
                                 <p className='text-base sm:text-lg md:text-xl font-light italic leading-relaxed'>
                                     Filheim,{' '}
                                     <span className='font-semibold'>
-                                        a sister company of Sycip Builders
+                                        a sister company of SyCip Builders
                                         Company
                                     </span>
                                     , elevates spaces with luxury craftsmanship
