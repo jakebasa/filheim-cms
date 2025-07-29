@@ -85,7 +85,6 @@ async function AboutPage() {
                 </div>
                 <AboutHero />
             </div>
-
             {/* Our Story Section */}
             <section className='py-24 px-4 sm:px-10 bg-white'>
                 <div className='max-w-5xl mx-auto text-center space-y-8'>
@@ -107,7 +106,6 @@ async function AboutPage() {
                     </p>
                 </div>
             </section>
-
             {/* Founder Section */}
             <section className='py-24 px-4 sm:px-10 bg-gray-50'>
                 <div className='max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center'>
@@ -143,7 +141,6 @@ async function AboutPage() {
                     </div>
                 </div>
             </section>
-
             {/* Why Choose Section */}
             <section className='py-24 px-4 sm:px-10 bg-black text-white'>
                 <div className='text-center max-w-4xl mx-auto mb-20'>
@@ -186,6 +183,73 @@ async function AboutPage() {
                             </div>
                         );
                     })}
+                </div>
+            </section>
+
+            {/* SyCip Sister Section */}
+            <section className='py-24 px-4 sm:px-10 bg-gray-50'>
+                <div className='max-w-6xl mx-auto'>
+                    <div
+                        className='relative py-16 px-6 sm:px-12 min-h-[600px] bg-cover bg-center bg-no-repeat rounded-2xl shadow-xl overflow-hidden'
+                        style={{
+                            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url('/sycip3.png')`,
+                        }}
+                    >
+                        <div className='absolute inset-0 bg-black/30 backdrop-blur-sm'></div>
+
+                        <div className='relative z-10 flex items-center justify-center h-full'>
+                            <div className='bg-white/10 backdrop-blur-lg rounded-xl p-8 sm:p-12 max-w-3xl text-center text-white shadow-lg space-y-6'>
+                                <h2
+                                    className='text-3xl sm:text-4xl md:text-5xl font-bold'
+                                    style={{
+                                        fontFamily: "'Playfair Display', serif",
+                                    }}
+                                >
+                                    A Legacy of Excellence
+                                </h2>
+
+                                <div className='w-24 h-1 mx-auto bg-gradient-to-r from-[#C0A86B] via-[#FEECCB] to-[#A68638]'></div>
+
+                                <p className='text-base sm:text-lg md:text-xl font-light italic leading-relaxed'>
+                                    Filheim,{' '}
+                                    <span className='font-semibold'>
+                                        a sister company of Sycip Builders
+                                        Company
+                                    </span>
+                                    , elevates spaces with luxury craftsmanship
+                                    and bespoke design, extending Sycip's legacy
+                                    of excellence beyond residences to deliver
+                                    tailored projects that blend premium quality
+                                    with unique client visions.
+                                </p>
+
+                                <a
+                                    href='https://www.sycipbuilders.com/'
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    className='inline-flex items-center gap-2 text-gray-200 shadow-md hover:text-white bg-[#9A7842] hover:bg-[#7a5f34]
+              uppercase text-sm py-3 px-6 rounded-lg font-bold tracking-wider transition-all 
+              duration-300 hover:translate-y-[-2px] hover:shadow-lg'
+                                >
+                                    Visit Sycip Builders
+                                    <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        className='h-4 w-4'
+                                        fill='none'
+                                        viewBox='0 0 24 24'
+                                        stroke='currentColor'
+                                    >
+                                        <path
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                            strokeWidth={2}
+                                            d='M14 5l7 7m0 0l-7 7m7-7H3'
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
