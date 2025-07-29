@@ -91,13 +91,13 @@ export const getAsideImages = () =>
         }))
     );
 
-export const getCeosImages = () =>
-    fetchFromStrapi('ceos?populate=image', {}, (data) =>
-        data.map((item) => ({
-            name: item.name,
-            image: item.image?.url || DEFAULT_IMAGE,
-        }))
-    );
+// export const getCeosImages = () =>
+//     fetchFromStrapi('ceos?populate=image', {}, (data) =>
+//         data.map((item) => ({
+//             name: item.name,
+//             image: item.image?.url || DEFAULT_IMAGE,
+//         }))
+//     );
 
 export const getTeamImages = () =>
     fetchFromStrapi('teams?populate=image', {}, (data) =>

@@ -26,7 +26,7 @@ export async function POST(request) {
 
         // Handle singular/plural forms
         const modelMappings = {
-            ceo: 'ceos',
+            // ceo: 'ceos',
             team: 'teams',
             gallery: 'galleries',
             'background-image': 'background-images',
@@ -67,7 +67,7 @@ export async function POST(request) {
                 '/contact',
             ],
             asides: ['/', '/about', '/services'],
-            ceos: ['/', '/about'], // Added home page since CEO might appear there too
+            // ceos: ['/', '/about'],
             teams: ['/about'],
         };
 

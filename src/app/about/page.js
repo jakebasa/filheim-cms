@@ -4,7 +4,6 @@ import {
     getBackgroundImages,
     fetchProjects,
     getTeamImages,
-    getCeosImages,
 } from '../../constants/data';
 
 const whyChooseContent = [
@@ -58,15 +57,14 @@ function shuffleProjects(projects, seed) {
 
 async function AboutPage() {
     // Fetch all data in parallel
-    const [images, projects, ceosData, teamMembers] = await Promise.all([
+    const [images, projects, teamMembers] = await Promise.all([
         getBackgroundImages(),
         fetchProjects(),
-        getCeosImages(),
         getTeamImages(),
     ]);
 
     const bgImage = images && images.length > 0 ? images[0].image : '';
-    const ceoData = ceosData.length > 0 ? ceosData[0] : null;
+    // const ceoData = ceosData.length > 0 ? ceosData[0] : null;
     const chooseProjects = shuffleProjects(projects, 'filheim-choose');
 
     return (
@@ -107,7 +105,7 @@ async function AboutPage() {
                 </div>
             </section>
             {/* Founder Section */}
-            <section className='py-24 px-4 sm:px-10 bg-gray-50'>
+            {/* <section className='py-24 px-4 sm:px-10 bg-gray-50'>
                 <div className='max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center'>
                     {ceoData ? (
                         <img
@@ -140,7 +138,7 @@ async function AboutPage() {
                         </p>
                     </div>
                 </div>
-            </section>
+            </section> */}
             {/* Why Choose Section */}
             <section className='py-24 px-4 sm:px-10 bg-black text-white'>
                 <div className='text-center max-w-4xl mx-auto mb-20'>
@@ -214,10 +212,10 @@ async function AboutPage() {
                                     Filheim,{' '}
                                     <span className='font-semibold'>
                                         a sister company of SyCip Builders
-                                        Company
+                                        Corporation
                                     </span>
                                     , elevates spaces with luxury craftsmanship
-                                    and bespoke design, extending Sycip's legacy
+                                    and bespoke design, extending SyCip's legacy
                                     of excellence beyond residences to deliver
                                     tailored projects that blend premium quality
                                     with unique client visions.
@@ -231,7 +229,7 @@ async function AboutPage() {
               uppercase text-sm py-3 px-6 rounded-lg font-bold tracking-wider transition-all 
               duration-300 hover:translate-y-[-2px] hover:shadow-lg'
                                 >
-                                    Visit Sycip Builders
+                                    Visit SyCip Builders
                                     <svg
                                         xmlns='http://www.w3.org/2000/svg'
                                         className='h-4 w-4'
