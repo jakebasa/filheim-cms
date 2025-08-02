@@ -44,6 +44,7 @@ function HomepageOtherLayout({ projects }) {
                         disableOnInteraction: false,
                         pauseOnMouseEnter: true,
                     }}
+                    grabCursor={true}
                     speed={1000}
                     breakpoints={{
                         320: { slidesPerView: 1 },

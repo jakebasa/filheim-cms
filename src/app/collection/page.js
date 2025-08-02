@@ -11,13 +11,13 @@ async function CollectionPage() {
         fetchProjects(),
     ]);
 
-    // const cabinetProjects = projects.filter(
-    //     (project) => !project.name.toLowerCase().includes('countertop')
-    // );
+    const cabinetProjects = projects.filter(
+        (project) => !project.name.toLowerCase().includes('countertop')
+    );
 
-    // const countertopProjects = projects.filter((project) =>
-    //     project.name.toLowerCase().includes('countertop')
-    // );
+    const countertopProjects = projects.filter((project) =>
+        project.name.toLowerCase().includes('countertop')
+    );
 
     const bgImage = images.find((img) => img.name === 'bg4');
     const backgroundImage = bgImage ? bgImage.image : '';
@@ -39,8 +39,8 @@ async function CollectionPage() {
                 <CollectionHero />
             </div>
 
-            <CollectionCabinets projects={projects} />
-            <CollectionCountertops projects={projects} />
+            <CollectionCabinets projects={cabinetProjects} />
+            <CollectionCountertops projects={countertopProjects} />
             <div className='bg-white py-32'></div>
         </div>
     );

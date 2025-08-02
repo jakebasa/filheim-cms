@@ -23,12 +23,27 @@ async function Home() {
     const bgOverviewImage = images.find((img) => img.name === 'bg-overview');
     const overviewImage = bgOverviewImage ? bgOverviewImage.image : '';
 
-    // Take first 8 projects for HomepageProducts
-    const featuredProjects = allProjects.slice(0, 8).map((project) => ({
-        id: project.id,
-        image: project.image,
-        title: project.name || 'Featured Project',
-    }));
+    // Filter cabinets and countertops
+    const cabinetProjects = allProjects
+        .filter((project) => !project.name.toLowerCase().includes('countertop'))
+        .slice(0, 8)
+        .map((project) => ({
+            id: project.id,
+            image: project.image,
+            title: project.name || 'Cabinet Project',
+        }));
+
+    const countertopProjects = allProjects
+        .filter((project) => project.name.toLowerCase().includes('countertop'))
+        .slice(0, 8)
+        .map((project) => ({
+            id: project.id,
+            image: project.image,
+            title: project.name || 'Countertop Project',
+        }));
+
+    // Combine both for featured projects
+    const featuredProjects = [...cabinetProjects, ...countertopProjects];
     return (
         <div>
             <HeroSlider images={images}>

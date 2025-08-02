@@ -52,14 +52,17 @@ function CollectionCountertops({ projects = [] }) {
                     centeredSlides={true}
                     spaceBetween={30}
                     loop={true}
+                    speed={800}
                     autoplay={{
-                        delay: 5000,
+                        delay: 6000,
                         disableOnInteraction: false,
                     }}
                     pagination={{
                         clickable: true,
                         dynamicBullets: true,
                     }}
+                    watchSlidesProgress={true}
+                    grabCursor={true}
                     breakpoints={{
                         640: {
                             slidesPerView: 1.5,
@@ -77,7 +80,8 @@ function CollectionCountertops({ projects = [] }) {
                                 <img
                                     src={project.image}
                                     alt={project.name}
-                                    className='w-full h-full object-cover rounded-lg shadow-xl'
+                                    loading='lazy'
+                                    className='w-full h-full object-cover rounded-lg shadow-xl transform-gpu'
                                 />
                                 {/* <div className='absolute top-4 right-0 w-full'>
                                     <h3

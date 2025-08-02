@@ -4,6 +4,45 @@ import { useState, useEffect } from 'react';
 
 function HomepageProducts({ projects }) {
     const [selectedImage, setSelectedImage] = useState(null); // for modal
+    const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'cabinets', 'countertops'
+
+    // Filter and maintain layout for each type
+    const getFilteredProjects = () => {
+        let filtered = [];
+
+        switch (activeFilter) {
+            case 'cabinets':
+                filtered = projects.filter((project) => {
+                    const projectTitle = String(
+                        project?.title || ''
+                    ).toLowerCase();
+                    return !projectTitle.includes('countertop');
+                });
+                break;
+
+            case 'countertops':
+                filtered = projects.filter((project) => {
+                    const projectTitle = String(
+                        project?.title || ''
+                    ).toLowerCase();
+                    return projectTitle.includes('countertop');
+                });
+                break;
+
+            case 'all':
+            default:
+                filtered = [...projects];
+                break;
+        }
+
+        // Ensure consistent layout pattern regardless of filter
+        return filtered.map((item, index) => ({
+            ...item,
+            isWide: [0, 3, 4, 7].includes(index % 8), // Use modulo to repeat pattern every 8 items
+        }));
+    };
+
+    const filteredProjects = getFilteredProjects();
 
     const openModal = (image) => {
         setSelectedImage(image);
@@ -56,18 +95,53 @@ function HomepageProducts({ projects }) {
                                     collaborative vision and meticulous
                                     craftsmanship.
                                 </p>
+                                <div className='flex gap-4 mt-4'>
+                                    <button
+                                        onClick={() => setActiveFilter('all')}
+                                        className={`px-4 py-2 rounded-md transition-all duration-300 ${
+                                            activeFilter === 'all'
+                                                ? 'bg-[#9A7842] text-white'
+                                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                                        }`}
+                                    >
+                                        All Projects
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            setActiveFilter('cabinets')
+                                        }
+                                        className={`px-4 py-2 rounded-md transition-all duration-300 ${
+                                            activeFilter === 'cabinets'
+                                                ? 'bg-[#9A7842] text-white'
+                                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                                        }`}
+                                    >
+                                        Cabinets
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            setActiveFilter('countertops')
+                                        }
+                                        className={`px-4 py-2 rounded-md transition-all duration-300 ${
+                                            activeFilter === 'countertops'
+                                                ? 'bg-[#9A7842] text-white'
+                                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                                        }`}
+                                    >
+                                        Countertops
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
                         {/* Image Gallery Grid */}
                         <div className='flex flex-col md:flex-row md:flex-wrap gap-3'>
-                            {projects.map((item, index) => {
-                                const isWideItem = [0, 3, 4, 7].includes(index);
+                            {filteredProjects.map((item) => {
                                 return (
                                     <div
                                         key={item.id}
                                         className={`group relative overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
-                                            isWideItem
+                                            item.isWide
                                                 ? 'md:w-[calc(66.666%_-_0.375rem)]'
                                                 : 'md:w-[calc(33.333%_-_0.375rem)]'
                                         }`}
