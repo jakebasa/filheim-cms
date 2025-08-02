@@ -1,5 +1,6 @@
 'use client';
 import React, { useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 const defaultMenuItems = [
@@ -28,6 +29,7 @@ function Navbar({
     const [menuOpen, setMenuOpen] = React.useState(false);
     const menuRef = useRef(null);
     const buttonRef = useRef(null);
+    const pathname = usePathname();
 
     useEffect(() => {
         if (!menuOpen) return;
@@ -130,23 +132,39 @@ function Navbar({
                                 : ''
                         } md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0`}
                     >
-                        {menuItems.map((item) => (
-                            <li
-                                key={item.path}
-                                className={
-                                    menuOpen
-                                        ? `${hoverBg} rounded transition-colors`
-                                        : ''
-                                }
-                            >
-                                <Link
-                                    href={item.path}
-                                    className={`block py-2 px-3 md:p-0 ${textColor} font-normal hover:font-semibold`}
+                        {menuItems.map((item) => {
+                            const isActive = pathname === item.path;
+                            return (
+                                <li
+                                    key={item.path}
+                                    className={
+                                        menuOpen
+                                            ? `${hoverBg} rounded transition-colors`
+                                            : ''
+                                    }
                                 >
-                                    {item.label}
-                                </Link>
-                            </li>
-                        ))}
+                                    <Link
+                                        href={item.path}
+                                        className={`group relative block py-2 px-3 md:p-0 ${textColor} font-normal hover:font-semibold`}
+                                    >
+                                        <span className={`relative z-10`}>
+                                            {item.label}
+                                        </span>
+                                        <span
+                                            className={`absolute left-0 bottom-1 md:bottom-0 w-full h-[2px] transition-all duration-300 bg-current rounded origin-left
+                                                ${
+                                                    isActive
+                                                        ? 'scale-x-100 opacity-100'
+                                                        : 'scale-x-0 opacity-0'
+                                                }
+                                                group-hover:scale-x-100 group-hover:opacity-100
+                                            `}
+                                            aria-hidden='true'
+                                        />
+                                    </Link>
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div>
             </div>

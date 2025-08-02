@@ -1,3 +1,9 @@
+// Meta information for this page
+export const metadata = {
+    title: 'Filheim | About',
+    description:
+        'Learn about Filheim’s story, team, and legacy of excellence in bespoke interiors.',
+};
 import AboutHero from '../../components/about/AboutHero';
 import Navbar from '../../components/Navbar';
 import {

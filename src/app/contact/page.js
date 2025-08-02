@@ -1,3 +1,9 @@
+// Meta information for this page
+export const metadata = {
+    title: 'Filheim | Contact',
+    description:
+        'Contact Filheim for inquiries, consultations, or to start your bespoke interiors journey.',
+};
 import Navbar from '../../components/Navbar';
 import { getBackgroundImages } from '../../constants/data';
 import ContactSection from '../../components/contact/ContactSection';

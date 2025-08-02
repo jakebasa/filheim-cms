@@ -1,3 +1,9 @@
+// Meta information for this page
+export const metadata = {
+    title: 'Filheim | Collections',
+    description: 'Browse our collection of cabinets and countertops.',
+};
+
 import CollectionCabinets from '../../components/collections/CollectionCabinets';
 import CollectionHero from '../../components/collections/CollectionHero';
 import Navbar from '../../components/Navbar';

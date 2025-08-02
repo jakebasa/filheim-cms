@@ -1,3 +1,9 @@
+// Meta information for this page
+export const metadata = {
+    title: 'Filheim | Services',
+    description:
+        'Discover our range of services including customization, craftmanship, and installation.',
+};
 import ServicesHero from '../../components/services/ServicesHero';
 import ServicesCusto from '../../components/services/ServicesCusto';
 import ServicesCraftmanship from '../../components/services/ServicesCraftmanship';
