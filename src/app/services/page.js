@@ -16,7 +16,8 @@ async function ServicesPage() {
         getAsideImages(),
         fetchProjects(),
     ]);
-    const bgImage = images && images.length > 0 ? images[0].image : '';
+    const bgImage = images.find((img) => img.name === 'bg4');
+    const backgroundImage = bgImage ? bgImage.image : '';
     const craftmanshipImage = asideImages[1]?.image;
     const installationImage = asideImages[2]?.image;
     const customizationProjects = allProjects.slice(11, 16);
@@ -24,7 +25,7 @@ async function ServicesPage() {
         <div>
             <div
                 style={{
-                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(${bgImage})`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(${backgroundImage})`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',

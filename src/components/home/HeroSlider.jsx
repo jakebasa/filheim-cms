@@ -4,6 +4,13 @@ import { useState, useEffect } from 'react';
 const HeroSlider = ({ images, children }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
+    // Reorder images to have bg4 first
+    const orderedImages = [...images].sort((a, b) => {
+        if (a.name === 'bg4') return -1;
+        if (b.name === 'bg4') return 1;
+        return 0;
+    });
+
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % images.length);
@@ -15,7 +22,7 @@ const HeroSlider = ({ images, children }) => {
     return (
         <div className='relative w-full min-h-[700px]'>
             {/* Background Slides */}
-            {images.map((img, index) => (
+            {orderedImages.map((img, index) => (
                 <div
                     key={img.name}
                     className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
@@ -35,7 +42,7 @@ const HeroSlider = ({ images, children }) => {
 
             {/* Navigation Indicators */}
             <div className='absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-50'>
-                {images.map((_, index) => (
+                {orderedImages.map((_, index) => (
                     <button
                         key={index}
                         onClick={() => setCurrentSlide(index)}

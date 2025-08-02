@@ -19,12 +19,13 @@ async function CollectionPage() {
     //     project.name.toLowerCase().includes('countertop')
     // );
 
-    const bgImage = images && images.length > 0 ? images[0].image : '';
+    const bgImage = images.find((img) => img.name === 'bg4');
+    const backgroundImage = bgImage ? bgImage.image : '';
     return (
         <div>
             <div
                 style={{
-                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(${bgImage})`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(${backgroundImage})`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',

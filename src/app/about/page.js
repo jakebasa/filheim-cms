@@ -63,7 +63,8 @@ async function AboutPage() {
         getTeamImages(),
     ]);
 
-    const bgImage = images && images.length > 0 ? images[0].image : '';
+    const bgImage = images.find((img) => img.name === 'bg4');
+    const backgroundImage = bgImage ? bgImage.image : '';
     // const ceoData = ceosData.length > 0 ? ceosData[0] : null;
     const chooseProjects = shuffleProjects(projects, 'filheim-choose');
 
@@ -71,7 +72,7 @@ async function AboutPage() {
         <div className='min-h-screen bg-white text-gray-800'>
             <div
                 style={{
-                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(${bgImage})`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(${backgroundImage})`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
