@@ -95,7 +95,7 @@ function HomepageProducts({ projects }) {
                                     collaborative vision and meticulous
                                     craftsmanship.
                                 </p>
-                                <div className='flex gap-4 mt-4'>
+                                <div className='flex flex-col sm:flex-row gap-2 sm:gap-4 mt-4 w-full sm:w-auto'>
                                     <button
                                         onClick={() => setActiveFilter('all')}
                                         className={`px-4 py-2 rounded-md transition-all duration-300 ${
