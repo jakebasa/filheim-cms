@@ -1,50 +1,47 @@
-# React JS + Tailwind CSS Starter Template
+# Bespoke Cabinetry Website
 
-A starter template for creating React Apps, styled with Tailwind CSS.
+A **premium woodworking brand** website built with **Next.js** and **Strapi**, featuring a **modern, responsive design** and an easy-to-manage content management system.  
+Crafted to showcase **custom furniture** with elegance and high performance.
 
-## Getting started
+---
+
+## ✨ Features
+
+- **Responsive UI** – Optimized for mobile, tablet, and desktop.
+- **Dynamic Content** – Easily managed via Strapi CMS.
+- **High Performance** – Built with Next.js for fast, SEO-friendly pages.
+- **Custom Furniture Showcase** – Beautifully highlights bespoke designs.
+- **Optimized Images** – Sharp, fast-loading visuals for every device.
+
+---
+
+## 🖼️ Screenshots
 
 
-First, fork this repo.
 
-Now head over to creating a <a href="github.com/new">new</a> repo. From the repository template section, click the dropdown and select:
+**Homepage**
+![Homepage Screenshot](./screenshots/homepage.png)
 
-```
-yourusername/react-js-tailwind
-```
+**Product Showcase**
+![Product Showcase Screenshot](./screenshots/showcase.png)
 
-Make your changes to suit your project's needs. 
+**CMS Dashboard**
+![Strapi Dashboard Screenshot](./screenshots/dashboard.png)
 
-Clone locally with:
+---
 
-```
-git clone https://github.com/yourusername/projectname
-```
+## 🛠️ Tech Stack
 
-In your terminal, run:
+**Frontend**
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
-```
-npm install
-```
+**Backend**
+- [Strapi](https://strapi.io/) (Separate repo: [devjeiku/filheim-strapi](https://github.com/devjeiku/filheim-strapi))
+- REST API & Media Handling
 
-to install all dependencies.
+**Deployment**
+- [Vercel](https://vercel.com/)
 
-When it's done, run:
-
-```
-npm run dev
-```
-
-Hit
-
-```
-O
-````
-
-and vite will open it in your browser.
-
-Or open your browser and navigate to <a href="localhost:5173">localchost:5173</a>.
-
-Make your changes, save and "VOILA!
-
-Happy hacking!
+---
