@@ -20,13 +20,13 @@ Crafted to showcase **custom furniture** with elegance and high performance.
 
 
 **Homepage**
-![Homepage Screenshot](./screenshots/homepage.png)
+![Homepage Screenshot](./public/home.png)
 
-**Product Showcase**
-![Product Showcase Screenshot](./screenshots/showcase.png)
+**Project Showcase**
+![Project Showcase Screenshot](./public/project.png)
 
 **CMS Dashboard**
-![Strapi Dashboard Screenshot](./screenshots/dashboard.png)
+![Strapi Dashboard Screenshot](./public/strapi.png)
 
 ---
 
